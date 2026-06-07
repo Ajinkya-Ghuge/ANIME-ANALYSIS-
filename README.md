@@ -1,384 +1,378 @@
 <div align="center">
 
-# AnimeX Analytics
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=900&size=42&duration=3000&pause=1000&color=00F5FF&center=true&vCenter=true&width=900&lines=AnimeX+Analytics;Anime+Box+Office+Intelligence" alt="AnimeX Analytics" />
 
-### Anime Box Office Intelligence Platform
+<br/>
 
-**By Ajinkya Ghuge**
+### 🎌 Anime Box Office Intelligence Platform
 
-*A full-stack data analysis and machine learning web application that decodes the anime industry's box office, ratings, and studio performance across 40+ years of data.*
+**By [Ajinkya Ghuge](https://github.com/ajinkya)**
 
-[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
-[![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=flat&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
-[![Pandas](https://img.shields.io/badge/Pandas-2.0+-150458?style=flat&logo=pandas&logoColor=white)](https://pandas.pydata.org)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-F7931E?style=flat&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
-[![Chart.js](https://img.shields.io/badge/Chart.js-4.4-FF6384?style=flat&logo=chartdotjs&logoColor=white)](https://chartjs.org)
+*A full-stack data analytics + ML web app that decodes the anime industry's box office, ratings, and studio performance across 40+ years of data.*
+
+<br/>
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![Pandas](https://img.shields.io/badge/Pandas-2.0+-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
+[![Chart.js](https://img.shields.io/badge/Chart.js-4.4-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)](https://chartjs.org)
+
+<br/>
+
+> *"The data doesn't lie — but it takes the right question to make it speak."*
 
 </div>
 
 ---
 
-## Live Preview
+## 📸 Live Preview
 
+<table>
+<tr>
+<td width="50%">
 
-### Home page
-![Feature Modules](demo%20images/Screenshot%20(492).png)
+**🏠 Home Page**
+![Home Page](demo%20images/Screenshot%20(492).png)
 
-### Insights — Rating vs Box Office Correlation
-![Home Hero](demo%20images/Screenshot%20(491).png)
+</td>
+<td width="50%">
 
-### Analytics Dashboard — KPI Cards & Top 15 Chart
+**📊 Analytics Dashboard — KPI Cards**
 ![Dashboard KPIs](demo%20images/Screenshot%20(490).png)
 
-### Analytics Dashboard — Revenue Trends, Genre, Studio & Tier Charts
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**🔍 Deep Insights — Rating vs Box Office Correlation**
+![Insights](demo%20images/Screenshot%20(491).png)
+
+</td>
+<td width="50%">
+
+**📈 Dashboard — Revenue, Genre & Studio Charts**
 ![Dashboard Charts](demo%20images/Screenshot%20(489).png)
 
-### Home — Four Powerful Modules
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**🗃️ Data Explorer**
 ![Data Explorer](demo%20images/Screenshot%20(487).png)
 
-### Analytics Dashboard — KPI Cards & Top 15 Chart
-![Correlation Scatter](demo%20images/Screenshot%20(488).png)
+</td>
+<td width="50%">
 
-> **Run locally:** `python app.py` → open `http://localhost:5000`
+**📉 Dashboard — Top 15 Grossing Anime**
+![Top 15](demo%20images/Screenshot%20(488).png)
 
----
+</td>
+</tr>
+</table>
 
-## Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Architecture](#architecture)
-4. [Tech Stack](#tech-stack)
-5. [Dataset](#dataset)
-6. [Machine Learning](#machine-learning)
-7. [API Reference](#api-reference)
-8. [Project Structure](#project-structure)
-9. [Installation](#installation)
-10. [Usage Guide](#usage-guide)
-11. [Data Analysis Concepts](#data-analysis-concepts)
-12. [Workflow](#workflow)
-13. [Author](#author)
+> **▶ Run locally:** `python app.py` → open `http://localhost:5000`
 
 ---
 
-## Project Overview
+## 📋 Table of Contents
 
-**AnimeX Analytics** is a production-ready data analysis web application that tracks and analyses the global box office performance of 80 anime titles spanning from 1984 to 2022. It combines traditional exploratory data analysis (EDA) with machine learning prediction, all wrapped in a custom anime-themed dark UI.
+| # | Section |
+|---|---------|
+| 1 | [Project Overview](#-project-overview) |
+| 2 | [Key Analytical Findings](#-key-analytical-findings) |
+| 3 | [Features](#-features) |
+| 4 | [Architecture](#-architecture) |
+| 5 | [Tech Stack](#-tech-stack) |
+| 6 | [Dataset](#-dataset) |
+| 7 | [Machine Learning](#-machine-learning) |
+| 8 | [API Reference](#-api-reference) |
+| 9 | [Project Structure](#-project-structure) |
+| 10 | [Installation](#-installation) |
+| 11 | [Usage Guide](#-usage-guide) |
+
+---
+
+## 🎯 Project Overview
+
+**AnimeX Analytics** is a production-ready web application tracking the global box office performance of **80 anime titles** spanning **1984 to 2022**. It combines traditional EDA with machine learning prediction — all wrapped in a custom anime-themed dark UI.
 
 The platform answers real industry questions:
 
-- Which studios generate the highest return on investment?
-- Does a higher MAL score actually translate to more box office revenue?
-- Which genres dominate the global market?
-- What will a new anime's box office look like given its budget and ratings?
+| ❓ Question | 💡 Insight Provided |
+|---|---|
+| Which studios have the best ROI? | Studio radar + profitability rankings |
+| Does MAL score = box office? | Pearson correlation scatter (spoiler: r = 0.18) |
+| Which genres dominate globally? | Genre bubble chart + revenue breakdown |
+| What will a new anime gross? | ML ensemble predictor with confidence range |
 
 ---
 
-## Features
+## 📊 Key Analytical Findings
 
-### Module 1 — Live Dashboard
+<div align="center">
 
-Interactive real-time analytics dashboard with 6 KPI cards and 5 Chart.js visualisations.
+| 🏆 Metric | 📈 Value |
+|---|---|
+| Total industry revenue tracked | **$7.95B+** |
+| Highest grossing title | **Dragon Ball Z** — $750M |
+| Best ROI ever | **Your Name** — 152× ($2.5M → $380M) |
+| MAL–Box Office correlation | **r = 0.18** (weak positive) |
+| Top studio by revenue | **Toei Animation** |
+| Blockbusters (>$200M) | **9 titles** |
+| Fastest growing decade | **2010s** |
+
+</div>
+
+---
+
+## ✨ Features
+
+AnimeX Analytics is built around **4 core modules**:
+
+<details>
+<summary><b>📊 Module 1 — Live Dashboard</b></summary>
+
+<br/>
+
+Interactive analytics dashboard with **6 KPI cards** and **5 Chart.js visualisations**.
 
 **KPI Cards tracked:**
-- Total industry box office (combined revenue across all titles)
-- Highest grossing anime title
-- Average MyAnimeList score across dataset
-- Maximum ROI champion
-- Studios covered
-- Blockbuster count (titles exceeding $200M)
+- 💰 Total industry box office
+- 🥇 Highest grossing anime title
+- ⭐ Average MAL score across dataset
+- 🚀 Maximum ROI champion
+- 🎬 Studios covered
+- 💥 Blockbuster count (titles exceeding $200M)
 
 **Charts included:**
-- **Top 15 Grossing Anime** — Horizontal bar chart with a cyan-to-magenta gradient, sorted by box office
-- **Revenue Trend by Year** — Dual-axis line chart showing revenue ($M) and average MAL score over time (1984–2022)
-- **Revenue by Genre** — Vertical bar chart comparing total revenue across 12 genres
-- **Studio Performance (Top 10)** — Grouped horizontal bar chart comparing total revenue vs total profit
-- **Success Tier Distribution** — Doughnut chart showing Blockbuster / Hit / Solid / Moderate split
 
-**Filters:**
-- Genre dropdown filter
-- Studio dropdown filter
-- Sort-by selector (Box Office, MAL Score, ROI, Year)
-- Full text search across the data table
+| Chart | Type | Description |
+|---|---|---|
+| Top 15 Grossing Anime | Horizontal bar | Cyan-to-magenta gradient, sorted by revenue |
+| Revenue Trend by Year | Dual-axis line | Revenue ($M) + avg MAL score, 1984–2022 |
+| Revenue by Genre | Vertical bar | 12 genres compared |
+| Studio Performance | Grouped horizontal bar | Revenue vs Profit, top 10 |
+| Success Tier Distribution | Doughnut | Blockbuster / Hit / Solid / Moderate split |
 
----
+**Filters:** Genre • Studio • Sort-by • Full text search
 
-### Module 2 — Deep Insights
+</details>
+
+<details>
+<summary><b>🔍 Module 2 — Deep Insights</b></summary>
+
+<br/>
 
 Statistical analysis and correlation study page.
 
-**Scatter Plot — Rating vs Box Office Correlation:**
-Plots all 80 anime as scatter points coloured by genre, with MAL Score on the X axis and Box Office ($M) on the Y axis. Computes and displays Pearson correlation coefficient (r) for both MAL and IMDb scores.
+- **Scatter Plot** — Rating vs Box Office with Pearson r displayed
+- **ROI Champions Table** — *Your Name* tops at **152×** ROI
+- **Genre Bubble Chart** — Bubble size = title count; axes = avg MAL score vs avg revenue
+- **Industry Growth by Decade** — Animated decade cards from 1980s → 2020s
+- **Studio Radar Chart** — Top 5 studios compared across 5 dimensions
+- **Movies vs Series** — Avg revenue, score, budget, and ROI multiplier comparison
 
-Key finding: `r = 0.18` (MAL) — weak positive correlation, meaning quality alone does not determine box office success. Franchise power, marketing, and timing matter equally.
+</details>
 
-**ROI Champions Table:**
-Ranks anime by profitability ratio (Box Office ÷ Budget). *Your Name* holds the top spot at **152x** ROI — generated $380M from a $2.5M budget.
+<details>
+<summary><b>🤖 Module 3 — ML Box Office Predictor</b></summary>
 
-**Genre Bubble Chart:**
-Bubble size = number of titles per genre. X axis = average MAL score, Y axis = average revenue. Reveals which genres are both critically acclaimed and commercially dominant.
+<br/>
 
-**Industry Growth by Decade:**
-Decade grid cards with animated bottom-border fill proportional to revenue. Bar chart overlaid to show the exponential growth from 1980s to 2020s driven by streaming.
-
-**Studio Radar Chart:**
-Multi-axis radar comparing top 5 studios across Revenue, Profitability, Avg Score, Title Count, and Profit.
-
-**Movies vs Series Comparison:**
-Grouped bar chart comparing average revenue per title, score, budget, and ROI multiplier between movie and series formats.
-
----
-
-### Module 3 — ML Box Office Predictor
-
-A trained machine learning ensemble that forecasts box office revenue from user-defined parameters.
+A trained ML ensemble that forecasts box office revenue from user inputs.
 
 **Inputs:**
+
 | Parameter | Range |
-|-----------|-------|
+|---|---|
 | Format | Movie / Series |
 | Primary Genre | 13 genres |
-| Studio | 32 studios (from dataset) |
+| Studio | 32 studios |
 | Production Budget | $0.5M – $80M |
 | Expected MAL Score | 5.0 – 10.0 |
 | Expected IMDb Score | 4.0 – 10.0 |
 | Release Year | 1984 – 2027 |
 | Episodes (series only) | 1 – 500 |
 
-**Output:**
-- Ensemble predicted box office ($M)
-- Individual Random Forest and Linear Regression predictions
-- ±20% confidence range (low / high)
-- Estimated ROI percentage
-- Success tier classification (Blockbuster / Hit / Solid / Moderate)
-- Feature importance bar chart
-- Model performance metrics (R², MAE)
+**Output:** Ensemble predicted box office • Individual RF + LR predictions • ±20% confidence range • Estimated ROI % • Success tier • Feature importance chart • R² + MAE metrics
 
----
+</details>
 
-### Module 4 — Data Explorer
+<details>
+<summary><b>🗂️ Module 4 — Data Explorer</b></summary>
+
+<br/>
 
 Full searchable, sortable, filterable data table of all 80 anime titles.
 
-**Columns:** Rank, Title, Year, Genre (badge), Studio, Box Office, Budget, ROI, MAL Score (with mini progress bar), Success Tier (coloured badge)
+**Columns:** Rank • Title • Year • Genre badge • Studio • Box Office • Budget • ROI • MAL Score (mini progress bar) • Success Tier badge
 
-**Features:**
-- Real-time text search
-- Multi-filter (genre + studio + sort)
-- Click-to-sort on any column header
-- Ascending/descending toggle
+**Features:** Real-time text search • Multi-filter • Click-to-sort • Asc/desc toggle
+
+</details>
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        Browser (Client)                         │
 │                                                                 │
 │  index.html   dashboard.html   insights.html   predict.html    │
-│       │              │               │               │          │
 │       └──────────────┴───────────────┴───────────────┘          │
 │                           utils.js                              │
 │              (API helper, chart defaults, nav render)           │
 └──────────────────────────┬──────────────────────────────────────┘
                            │  HTTP / JSON (REST API)
 ┌──────────────────────────▼──────────────────────────────────────┐
-│                      Flask Application                          │
-│                         app.py                                  │
-│                                                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                   routes/api.py                          │   │
-│  │  /api/anime        /api/analysis      /api/predict       │   │
-│  │  /api/anime/filters /api/analysis/kpis /api/predict/...  │   │
-│  └──────────┬────────────────┬───────────────┬─────────────┘   │
-│             │                │               │                  │
-│  ┌──────────▼──────┐  ┌──────▼────────┐  ┌──▼──────────────┐  │
-│  │  services/      │  │  services/    │  │  ml/            │  │
-│  │  analytics.py   │  │  analytics.py │  │  predictor.py   │  │
-│  │                 │  │               │  │                 │  │
-│  │  EDA + Chart    │  │  KPI calcs    │  │  RandomForest   │  │
-│  │  data prep      │  │  Aggregation  │  │  + LinearReg    │  │
-│  └──────────┬──────┘  └──────┬────────┘  └──┬──────────────┘  │
+│                      Flask Application (app.py)                 │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │                   routes/api.py                           │   │
+│  │  /api/anime    /api/analysis    /api/predict              │   │
+│  └──────────┬───────────────┬────────────────┬──────────────┘   │
+│             │               │                │                  │
+│  ┌──────────▼──────┐  ┌─────▼─────────┐  ┌──▼─────────────┐   │
+│  │  analytics.py   │  │  analytics.py │  │  predictor.py  │   │
+│  │  EDA + Chart    │  │  KPI calcs    │  │  RF + LinReg   │   │
+│  └──────────┬──────┘  └──────┬────────┘  └──┬─────────────┘   │
 │             └────────────────┴───────────────┘                  │
-│                              │                                  │
-│  ┌───────────────────────────▼─────────────────────────────┐   │
-│  │                  data/dataset_builder.py                  │   │
-│  │                                                           │   │
-│  │  80 anime titles (real data)  →  Pandas DataFrame        │   │
-│  │  Feature engineering: profitability, decade, tier, etc.  │   │
-│  └───────────────────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────────────────┐   │
+│  │           data/dataset_builder.py                         │   │
+│  │   80 anime titles → Pandas DataFrame + Feature Eng.      │   │
+│  └──────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Request Flow
-
+**Request Flow:**
 ```
-User interacts with page
-        │
-        ▼
-utils.js API.get() / API.post()
-        │
-        ▼
-Flask route (routes/api.py)
-        │
-        ├── Analytics request ──► AnimeAnalyticsService.get_*()
-        │                                │
-        │                                ▼
-        │                         Pandas DataFrame operations
-        │                                │
-        │                                ▼
-        │                         JSON-serializable dict
-        │
-        └── Prediction request ──► AnimeBoxOfficePredictor.predict()
-                                          │
-                                          ▼
-                                   Feature engineering
-                                          │
-                                          ▼
-                                   RF + LR ensemble
-                                          │
-                                          ▼
-                                   Prediction + confidence
-        │
-        ▼
-jsonify() response
-        │
-        ▼
-Chart.js renders / DOM updates
+User interaction
+    → utils.js API.get() / API.post()
+    → Flask route (routes/api.py)
+    → AnimeAnalyticsService / AnimeBoxOfficePredictor
+    → Pandas / scikit-learn
+    → jsonify() response
+    → Chart.js renders
 ```
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 ### Backend
 
 | Library | Version | Purpose |
-|---------|---------|---------|
+|---|---|---|
 | **Flask** | 3.0+ | Web framework, REST API, static file serving |
 | **Pandas** | 2.0+ | Dataset construction, filtering, aggregation |
-| **NumPy** | 1.24+ | Numerical operations, log transforms, normalisation |
-| **scikit-learn** | 1.3+ | RandomForestRegressor, LinearRegression, LabelEncoder, StandardScaler, train_test_split |
+| **NumPy** | 1.24+ | Numerical ops, log transforms, normalisation |
+| **scikit-learn** | 1.3+ | RandomForest, LinearRegression, LabelEncoder, StandardScaler |
 | **Gunicorn** | 21.0+ | Production WSGI server |
 
 ### Frontend
 
 | Technology | Purpose |
-|-----------|---------|
-| **Vanilla JS (ES6+)** | No framework overhead — pure fetch API, DOM manipulation |
-| **Chart.js 4.4** | All charts — bar, line, scatter, bubble, doughnut, radar |
-| **CSS Custom Properties** | Design tokens (colours, spacing, fonts, animations) |
-| **Google Fonts** | Orbitron (display/headings) + Exo 2 (body) |
+|---|---|
+| **Vanilla JS (ES6+)** | Pure fetch API, no framework overhead |
+| **Chart.js 4.4** | Bar, line, scatter, bubble, doughnut, radar charts |
+| **CSS Custom Properties** | Design tokens — colours, spacing, fonts, animations |
+| **Google Fonts** | Orbitron (headings) + Exo 2 (body) |
 | **CSS backdrop-filter** | Glassmorphism card effect |
 
 ### Design System
 
-The UI uses a **dark neon-katana** theme with anime images and animated GIF backgrounds:
+> **Dark Neon-Katana** theme — anime images + animated GIFs at 16–18% opacity as background
 
-- Background: real anime images + GIFs at 16–18% opacity (fixed, full-viewport)
-- Cards: `rgba(13,20,40,0.85)` with `backdrop-filter: blur(12px)`
-- Typography: Orbitron for headings (cyberpunk feel), Exo 2 for body
-- Accent colours: `#00f5ff` (cyan), `#ff00aa` (magenta), `#ffd700` (gold), `#00ff88` (green)
-- Animations: Ken Burns on hero, floatUp on GIF decorations, scanline sweep, particle system
+```
+Background:   rgba(13, 20, 40, 0.85) + backdrop-filter: blur(12px)
+Accent cyan:  #00f5ff
+Accent pink:  #ff00aa
+Gold:         #ffd700
+Green:        #00ff88
+Animations:   Ken Burns • floatUp • scanline sweep • particle system
+```
 
 ---
 
-## Dataset
+## 📦 Dataset
 
-### Source & Construction (`data/dataset_builder.py`)
+### Source & Construction
 
-The dataset is built programmatically using real publicly-available data from:
-- **MyAnimeList** — scores and ratings
-- **Box Office Mojo** — theatrical revenue
-- **Wikipedia** — production budgets, episode counts, studios
+Built programmatically using real public data from **MyAnimeList**, **Box Office Mojo**, and **Wikipedia**.
 
-**80 anime titles** spanning 1984–2022, including movies and series.
+**80 anime titles** | **1984 – 2022** | Movies + Series
 
 ### Schema
 
 | Column | Type | Description |
-|--------|------|-------------|
+|---|---|---|
 | `title` | str | Anime title |
 | `year` | int | Release year |
-| `genre` | str | Genre string (e.g. "Action/Fantasy") |
-| `primary_genre` | str | First genre only |
+| `genre` / `primary_genre` | str | Genre (full + first only) |
 | `studio` | str | Production studio |
 | `budget_m_usd` | float | Production budget ($M) |
 | `box_office_m_usd` | float | Global box office revenue ($M) |
-| `mal_score` | float | MyAnimeList score (0–10) |
-| `imdb_score` | float | IMDb score (0–10) |
+| `mal_score` / `imdb_score` | float | Rating scores (0–10) |
 | `episodes` | int | Episode count (1 = movie) |
 | `type` | str | "Movie" or "Series" |
-| `profitability` | float | box_office / budget (ROI ratio) |
+| `profitability` | float | box_office ÷ budget (ROI ratio) |
 | `profit_m_usd` | float | box_office − budget |
-| `popularity_index` | float | Composite score (60% revenue + 40% MAL, 0–100) |
+| `popularity_index` | float | 60% revenue + 40% MAL, normalised 0–100 |
 | `decade` | str | e.g. "2010s" |
 | `success_tier` | str | Blockbuster / Hit / Solid / Moderate |
 | `rank` | int | Rank by box office |
 
-### Feature Engineering Applied
+### Feature Engineering
 
 ```python
 # Profitability ratio
 df["profitability"] = df["box_office_m_usd"] / df["budget_m_usd"]
 
 # Composite popularity index
-bo_norm    = normalize(box_office)
-score_norm = normalize(mal_score)
-df["popularity_index"] = (0.6 * bo_norm + 0.4 * score_norm) * 100
+df["popularity_index"] = (0.6 * normalize(box_office) + 0.4 * normalize(mal_score)) * 100
 
 # Success tier thresholds
-Blockbuster → box_office >= $200M
-Hit         → box_office >= $50M
-Solid       → box_office >= $10M
-Moderate    → box_office < $10M
+# Blockbuster → box_office >= $200M
+# Hit         → box_office >= $50M
+# Solid       → box_office >= $10M
+# Moderate    → box_office < $10M
 ```
 
 ---
 
-## Machine Learning
+## 🤖 Machine Learning
 
-### Model Architecture (`ml/predictor.py`)
-
-The predictor uses a **70/30 weighted ensemble** of two models:
+### Model Architecture
 
 ```
 Prediction = 0.70 × RandomForest + 0.30 × LinearRegression
 ```
 
 **Why ensemble?**
-- Random Forest captures non-linear relationships (budget × franchise × year interactions)
-- Linear Regression provides a regularising baseline that prevents extreme outlier predictions
+- Random Forest → captures non-linear interactions (budget × franchise × year)
+- Linear Regression → regularising baseline, prevents extreme outlier predictions
 
 ### Feature Set (11 features)
 
-| Feature | Type | Engineering |
-|---------|------|-------------|
-| `budget_m_usd` | continuous | Raw value |
-| `mal_score` | continuous | Raw value |
-| `imdb_score` | continuous | Raw value |
-| `year` | continuous | Raw value |
-| `episodes` | continuous | Raw value |
-| `is_movie` | binary | Derived from type |
-| `genre_encoded` | categorical | LabelEncoder |
-| `studio_encoded` | categorical | LabelEncoder |
-| `years_since_2000` | continuous | `max(year - 2000, 0)` |
-| `score_product` | interaction | `mal_score × imdb_score` |
-| `budget_squared` | log | `log1p(budget_m_usd)` |
+| Feature | Engineering |
+|---|---|
+| `budget_m_usd`, `mal_score`, `imdb_score`, `year`, `episodes` | Raw values |
+| `is_movie` | Binary — derived from type |
+| `genre_encoded`, `studio_encoded` | LabelEncoder |
+| `years_since_2000` | `max(year - 2000, 0)` |
+| `score_product` | `mal_score × imdb_score` (interaction) |
+| `budget_squared` | `log1p(budget_m_usd)` |
 
-### Target Variable
-
-The target `box_office_m_usd` is **log-transformed** before training to handle the right-skewed distribution:
+### Training Details
 
 ```python
-y = np.log1p(df["box_office_m_usd"])   # train on log scale
-prediction = np.expm1(model.predict())  # inverse transform for output
-```
+# Log-transform target (right-skewed distribution)
+y = np.log1p(df["box_office_m_usd"])
 
-### Random Forest Configuration
-
-```python
+# Random Forest config
 RandomForestRegressor(
     n_estimators=200,
     max_depth=8,
@@ -386,73 +380,48 @@ RandomForestRegressor(
     random_state=42,
     n_jobs=-1
 )
-```
 
-### Confidence Interval
-
-A simple ±20% band is applied to the ensemble prediction:
-
-```python
+# Confidence interval
 confidence_low  = ensemble * 0.80
 confidence_high = ensemble * 1.20
+
+# Train/test split: 80/20
 ```
-
-### Training Split
-
-```
-80% training  |  20% test
-random_state=42 for reproducibility
-```
-
-### Performance Metrics
-
-Evaluated on held-out test set:
-
-| Metric | Description |
-|--------|-------------|
-| **R²** | Coefficient of determination — proportion of variance explained |
-| **MAE** | Mean Absolute Error in $M — average prediction error |
 
 ---
 
-## API Reference
+## 📡 API Reference
 
 All endpoints return `{ "status": "ok", "data": ... }`.
 
 ### Anime Endpoints
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/anime` | All anime, filterable. Params: `search`, `genre`, `studio`, `sort_by`, `order`, `limit` |
-| GET | `/api/anime/filters` | Available filter options (genres, studios, years) |
+|---|---|---|
+| `GET` | `/api/anime` | All anime — params: `search`, `genre`, `studio`, `sort_by`, `order`, `limit` |
+| `GET` | `/api/anime/filters` | Available filter options (genres, studios, years) |
 
 ### Analysis Endpoints
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/analysis` | Full analysis bundle (all chart data) |
-| GET | `/api/analysis/kpis` | KPI summary cards |
-| GET | `/api/analysis/top-grossing` | Top N by box office. Param: `n` (default 15) |
-| GET | `/api/analysis/trends` | Yearly revenue and score trends |
-| GET | `/api/analysis/genres` | Genre breakdown |
-| GET | `/api/analysis/studios` | Studio performance comparison |
-| GET | `/api/analysis/correlation` | Scatter data + Pearson r values |
-| GET | `/api/analysis/profitability` | Top ROI leaders |
+|---|---|---|
+| `GET` | `/api/analysis` | Full analysis bundle (all chart data) |
+| `GET` | `/api/analysis/kpis` | KPI summary cards |
+| `GET` | `/api/analysis/top-grossing` | Top N by box office — param: `n` (default 15) |
+| `GET` | `/api/analysis/trends` | Yearly revenue and score trends |
+| `GET` | `/api/analysis/genres` | Genre breakdown |
+| `GET` | `/api/analysis/studios` | Studio performance comparison |
+| `GET` | `/api/analysis/correlation` | Scatter data + Pearson r values |
+| `GET` | `/api/analysis/profitability` | Top ROI leaders |
 
 ### Prediction Endpoints
 
 | Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/predict` | Predict box office. Body: `genre, budget_m, mal_score, imdb_score, year, is_movie, studio, episodes` |
-| GET | `/api/predict/model-info` | Model metrics, feature importance, studio/genre lists |
+|---|---|---|
+| `POST` | `/api/predict` | Predict box office from inputs |
+| `GET` | `/api/predict/model-info` | Model metrics, feature importance, studio/genre lists |
 
-### Health Check
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Server status |
-
-### Example Prediction Request
+### Example
 
 ```bash
 curl -X POST http://localhost:5000/api/predict \
@@ -468,8 +437,6 @@ curl -X POST http://localhost:5000/api/predict \
     "episodes": 1
   }'
 ```
-
-### Example Response
 
 ```json
 {
@@ -489,7 +456,7 @@ curl -X POST http://localhost:5000/api/predict \
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 anime-analytics/
@@ -500,265 +467,128 @@ anime-analytics/
 ├── anime_dataset.csv           # Pre-built dataset export
 │
 ├── data/
-│   ├── __init__.py
-│   └── dataset_builder.py      # 80-entry dataset, feature engineering
+│   └── dataset_builder.py      # 80-entry dataset + feature engineering
 │
 ├── services/
-│   ├── __init__.py
-│   └── analytics.py            # All EDA logic — KPIs, aggregations, chart data
+│   └── analytics.py            # EDA logic — KPIs, aggregations, chart data
 │
 ├── ml/
-│   ├── __init__.py
 │   └── predictor.py            # ML ensemble (RandomForest + LinearRegression)
 │
 ├── routes/
-│   ├── __init__.py
 │   └── api.py                  # Flask Blueprint — all /api/* endpoints
 │
 ├── templates/
-│   ├── index.html              # Home page — hero, feature cards, top 10
-│   ├── dashboard.html          # Analytics dashboard — KPIs, 5 charts, table
-│   ├── insights.html           # Deep insights — correlation, ROI, decades
-│   └── predict.html            # ML predictor — form, results, feature importance
+│   ├── index.html              # Home — hero, feature cards, top 10
+│   ├── dashboard.html          # KPIs + 5 charts + data table
+│   ├── insights.html           # Correlation, ROI, decades, radar
+│   └── predict.html            # ML predictor form + results
 │
 └── static/
-    ├── css/
-    │   └── main.css            # Full design system — tokens, components, animations
-    ├── js/
-    │   └── utils.js            # Shared JS — API helper, Chart.js defaults, nav
-    └── images/                 # Anime images and GIFs used as backgrounds
-        ├── your-name-sunset.jpg
-        ├── demon-slayer-infinity.jpg
-        ├── jjk-poster.jpg
-        ├── goku.gif
-        ├── anime-jujutsu-kaisen.gif
-        ├── demon-slayer-67.gif
-        ├── sky-kimi2.gif
-        └── ...
+    ├── css/main.css            # Full design system — tokens, components, animations
+    ├── js/utils.js             # Shared JS — API helper, Chart.js defaults, nav
+    └── images/                 # Anime images + GIF backgrounds
 ```
 
 ---
 
-## Installation
+## ⚡ Installation
 
 ### Prerequisites
-
-- Python 3.10 or higher
+- Python 3.10+
 - pip
 
-### Steps
-
 ```bash
-# 1. Clone or download the project
+# 1. Clone / download the project
 cd anime-analytics
 
-# 2. Create a virtual environment
+# 2. Create and activate a virtual environment
 python -m venv venv
 
 # Windows
 venv\Scripts\activate
 
-# macOS/Linux
+# macOS / Linux
 source venv/bin/activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Run the application
+# 4. Run the app
 python app.py
 ```
 
-Open your browser at **http://localhost:5000**
+Open **http://localhost:5000** in your browser.
 
 ### Production Deployment
 
 ```bash
-# Using Gunicorn
+# Gunicorn
 gunicorn app:app --bind 0.0.0.0:$PORT --workers 2
 ```
 
-The `Procfile` is already configured for Heroku / Railway deployment:
+Procfile already configured for **Heroku / Railway**:
 ```
 web: gunicorn app:app --bind 0.0.0.0:$PORT
 ```
 
 ---
 
-## Usage Guide
+## 📖 Usage Guide
 
-### Dashboard
+<details>
+<summary><b>📊 Dashboard</b></summary>
 
 1. Open `/dashboard`
-2. Use the **Genre** and **Studio** dropdowns to filter all charts simultaneously
+2. Use **Genre** and **Studio** dropdowns to filter all charts simultaneously
 3. Change **Sort By** to reorder the data table
-4. Scroll down to the **Full Dataset** table — click any column header to sort
+4. Scroll to the **Full Dataset** table — click any column header to sort
 5. Use the search box for instant text search across title and studio
 
-### Insights
+</details>
+
+<details>
+<summary><b>🔍 Insights</b></summary>
 
 1. Open `/insights`
 2. The **scatter plot** shows every anime as a dot — hover for title and revenue
-3. The **ROI Champions** list shows the best investments in anime history
-4. The **decade chart** shows how the industry has grown from the 1980s to 2020s
+3. **ROI Champions** lists the best investments in anime history
+4. The **decade chart** shows industry growth from the 1980s to 2020s
 5. The **radar chart** compares the top 5 studios across 5 dimensions
 
-### Predictor
+</details>
+
+<details>
+<summary><b>🤖 Predictor</b></summary>
 
 1. Open `/predict`
 2. Select **Movie** or **Series** format
-3. Choose a **Genre** and **Studio**
-4. Drag the sliders for **Budget**, **MAL Score**, **IMDb Score**, and **Year**
+3. Choose **Genre** and **Studio**
+4. Drag sliders for **Budget**, **MAL Score**, **IMDb Score**, and **Year**
 5. For Series, set the **Episodes** slider
 6. Click **Predict Box Office**
-7. The right panel shows the ensemble result, individual model predictions, ROI, and tier
-8. The **Feature Importance** chart (below) shows which inputs the model weights most heavily
+7. Right panel shows: ensemble result, individual model predictions, ROI, and tier
+8. **Feature Importance** chart shows which inputs the model weights most
 
----
-
-## Data Analysis Concepts
-
-### Exploratory Data Analysis (EDA)
-
-The `AnimeAnalyticsService` class performs the following EDA operations on the Pandas DataFrame:
-
-| Analysis | Method | Output |
-|----------|--------|--------|
-| Revenue distribution | `nlargest()`, sort | Top N chart |
-| Temporal trends | `groupby("year").agg()` | Line chart |
-| Genre comparison | `groupby("primary_genre").agg()` | Bar + bubble charts |
-| Studio benchmarking | `groupby("studio").agg()` | Grouped bar + radar |
-| Correlation analysis | `.corr()` Pearson | Scatter with r value |
-| Profitability ranking | `nlargest("profitability")` | ROI leaderboard |
-| Decade segmentation | `year // 10 * 10` | Decade grid |
-| Distribution analysis | `value_counts()` | Doughnut chart |
-
-### Statistical Methods Used
-
-- **Pearson Correlation Coefficient** — measures linear relationship between rating scores and box office revenue
-- **Min-Max Normalisation** — used for the composite popularity index
-- **Log Transformation** — applied to the ML target variable to handle right-skewed box office distribution
-- **Feature Importance** — derived from `RandomForest.feature_importances_` (mean decrease in impurity)
-
-### Key Analytical Findings
-
-From the dataset analysis:
-
-| Finding | Value |
-|---------|-------|
-| Total industry revenue tracked | $7.95B+ |
-| Highest grossing title | Dragon Ball Z ($750M) |
-| Best ROI | Your Name — 152x ($2.5M → $380M) |
-| MAL–Box Office correlation | r = 0.18 (weak positive) |
-| Top studio by revenue | Toei Animation |
-| Blockbusters (>$200M) | 9 titles |
-| Fastest growing decade | 2010s |
-
----
-
-## Workflow
-
-### End-to-End Data Pipeline
-
-```
-Raw Data (Wikipedia, MAL, Box Office Mojo)
-              │
-              ▼
-  dataset_builder.py
-  ┌─────────────────────────────────────────┐
-  │  1. Define 80 anime entries (hardcoded) │
-  │  2. Build Pandas DataFrame              │
-  │  3. Feature engineering:               │
-  │     - profitability ratio               │
-  │     - profit in $M                      │
-  │     - popularity index (composite)      │
-  │     - decade extraction                 │
-  │     - primary genre parsing             │
-  │     - success tier classification       │
-  │  4. Handle missing values               │
-  │  5. Sort + rank by box office           │
-  └─────────────────────────────────────────┘
-              │
-              ▼
-  AnimeAnalyticsService (singleton)
-  ┌─────────────────────────────────────────┐
-  │  Loaded once on first API request       │
-  │  Cached in memory for all subsequent    │
-  │  queries — no database needed           │
-  └─────────────────────────────────────────┘
-              │
-        ┌─────┴──────────────────────┐
-        │                            │
-        ▼                            ▼
-  EDA / Chart Data            ML Training
-  ─────────────────────       ─────────────────────────────
-  KPIs: sum, mean, max        LabelEncode: genre, studio
-  Trends: groupby year        StandardScale: features
-  Genre: groupby primary      Train/test split: 80/20
-  Studio: groupby studio      Log-transform target
-  Correlation: .corr()        Fit RandomForest(200 trees)
-  Profitability: nlargest     Fit LinearRegression
-  Decade: groupby decade      Compute R², MAE metrics
-        │                            │
-        ▼                            ▼
-  JSON response               Singleton predictor ready
-        │                            │
-        └──────────┬─────────────────┘
-                   ▼
-           Flask API routes
-           /api/analysis → EDA data
-           /api/predict  → ML prediction
-                   │
-                   ▼
-           Browser (Chart.js + DOM)
-           Renders charts and tables
-           in real time
-```
-
-### User Interaction Flow
-
-```
-User visits /
-      │
-      ├── Loads hero (Your Name background + animated GIFs)
-      ├── Fetches /api/analysis/kpis → animates stat counters
-      └── Fetches /api/anime?sort=box_office&limit=10 → renders top 10 list
-
-User visits /dashboard
-      │
-      ├── Fetches /api/anime/filters → populates genre/studio dropdowns
-      ├── Fetches /api/analysis → renders all 5 charts simultaneously
-      ├── Fetches /api/anime?limit=80 → populates data table
-      └── On filter change → re-fetches with params → updates table
-
-User visits /insights
-      │
-      ├── Fetches /api/analysis (full bundle)
-      ├── Renders scatter plot with Pearson r display
-      ├── Renders ROI champions list
-      ├── Renders decade grid with animated bottom bars
-      └── Renders radar chart for studio comparison
-
-User visits /predict
-      │
-      ├── Fetches /api/predict/model-info → shows feature importance
-      ├── User adjusts sliders / dropdowns
-      ├── Clicks "Predict Box Office"
-      ├── POST /api/predict with form values
-      └── Displays ensemble result + confidence range + tier badge
-```
-
----
-
-## Author
-
-**Ajinkya Ghuge**
-
-Built with Flask, Pandas, scikit-learn, and Chart.js.
-Data sourced from MyAnimeList, Box Office Mojo, and Wikipedia.
+</details>
 
 ---
 
 <div align="center">
+
+## 👤 Author
+
+**Ajinkya Ghuge**
+
+Built with Flask • Pandas • scikit-learn • Chart.js
+
+Data sourced from MyAnimeList, Box Office Mojo, and Wikipedia.
+
+<br/>
+
+⭐ **If this project helped you, give it a star!** ⭐
+
+<br/>
 
 *"The data doesn't lie — but it takes the right question to make it speak."*
 
