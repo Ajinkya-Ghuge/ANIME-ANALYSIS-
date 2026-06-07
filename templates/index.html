@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AnimeX Analytics — Anime Box Office Intelligence</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<style>
+/* ══ Global GIF background — animated, visible behind all content ══ */
+.gif-page-bg {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none;
+  overflow: hidden;
+}
+.gif-page-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.18;
+  display: block;
+}
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('/static/images/your-name-sunset.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(3,5,15,0.40) 0%,
+      rgba(3,5,15,0.25) 30%,
+      rgba(3,5,15,0.55) 70%,
+      rgba(3,5,15,0.92) 100%),
+    linear-gradient(to right,
+      rgba(3,5,15,0.25) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(3,5,15,0.25) 100%);
+}
+
+.hero-gif-jjk {
+  position: absolute;
+  top: 80px; right: 60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(0,245,255,0.35);
+  box-shadow: 0 0 30px rgba(0,245,255,0.25), 0 0 60px rgba(0,245,255,0.10);
+  animation: floatUp 5s ease-in-out infinite;
+  z-index: 2;
+}
+.hero-gif-jjk img { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-gif-ds {
+  position: absolute;
+  bottom: 120px; left: 60px;
+  width: 180px; height: 180px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(255,0,170,0.35);
+  box-shadow: 0 0 25px rgba(255,0,170,0.22), 0 0 50px rgba(255,0,170,0.08);
+  animation: floatUp 7s ease-in-out infinite 1.5s;
+  z-index: 2;
+}
+.hero-gif-ds img { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-char-left {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 280px; height: 420px;
+  z-index: 2;
+  opacity: 0;
+  animation: slideInRight 1.2s ease 0.8s forwards;
+  transform: scaleX(-1);
+}
+.hero-char-left img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  mask-image: linear-gradient(to top, transparent 0%, black 30%);
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 30%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: scanline 8s linear infinite;
+  opacity: 0.25;
+  z-index: 3;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,245,255,0.12);
+  border: 1px solid rgba(0,245,255,0.30);
+  border-radius: 20px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.7rem;
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.8s ease both;
+  backdrop-filter: blur(8px);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.8s ease 0.1s both;
+}
+.hero-title .line1 { display: block; color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,0.8); }
+.hero-title .line2 {
+  display: block;
+  background: linear-gradient(135deg, var(--cyan) 0%, #88ffff 40%, var(--magenta) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(0,245,255,0.4));
+}
+
+.hero-subtitle {
+  max-width: 560px; font-size: 1.05rem;
+  color: rgba(232,244,255,0.85); line-height: 1.7;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.8s ease 0.2s both;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+}
+
+.hero-cta {
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 0.8s ease 0.3s both;
+}
+
+.hero-stats {
+  display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center;
+  margin-top: 4rem;
+  animation: fadeInUp 0.8s ease 0.5s both;
+  background: rgba(3,5,15,0.55);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(0,245,255,0.15);
+  border-radius: 20px;
+  padding: 1.5rem 2.5rem;
+}
+
+.hero-stat { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.hero-stat-value {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--cyan), var(--magenta));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-stat-label { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); font-family: var(--font-display); }
+.hero-divider { width: 1px; height: 40px; background: var(--border); align-self: center; }
+
+/* ══ FEATURES ══ */
+.features {
+  padding: 6rem 2rem;
+  max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+.features-header { text-align: center; margin-bottom: 4rem; }
+.features-tag { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem; }
+.features-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.2; }
+
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--trans);
+  cursor: pointer; text-decoration: none; display: block;
+  position: relative; backdrop-filter: blur(12px);
+}
+.feature-card-img { width: 100%; height: 160px; overflow: hidden; position: relative; }
+.feature-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+.feature-card:hover .feature-card-img img { transform: scale(1.08); }
+.feature-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(13,20,40,0.9) 100%);
+}
+.feature-card-body { padding: 1.5rem; position: relative; }
+.feature-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: var(--accent, linear-gradient(90deg, var(--cyan), var(--magenta)));
+  transform: scaleX(0); transition: transform 0.4s ease; z-index: 2;
+}
+.feature-card:hover { border-color: var(--border-glow); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,245,255,0.12); }
+.feature-card:hover::before { transform: scaleX(1); }
+
+.feature-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 0.75rem; color: var(--text-primary); }
+.feature-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; }
+.feature-arrow { display: inline-block; margin-top: 1.25rem; font-size: 0.75rem; font-family: var(--font-display); letter-spacing: 1px; text-transform: uppercase; }
+
+/* ══ LATEST ══ */
+.latest { position: relative; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 2rem; overflow: hidden; }
+.latest-bg { position: absolute; inset: 0; background-image: url('/static/images/demon-slayer-img.jpg'); background-size: cover; background-position: center; z-index: 0; }
+.latest-bg::after { content: ''; position: absolute; inset: 0; background: rgba(3,5,15,0.82); }
+.latest-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+.latest-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+
+.anime-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+.anime-item {
+  background: rgba(13,20,40,0.80); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.25rem;
+  display: flex; align-items: center; gap: 1rem;
+  transition: var(--trans); backdrop-filter: blur(12px);
+}
+.anime-item:hover { border-color: var(--border-glow); background: rgba(17,28,56,0.90); transform: translateX(4px); }
+.anime-rank { font-family: var(--font-display); font-size: 1.4rem; font-weight: 900; min-width: 36px; text-align: center; }
+.anime-info { flex: 1; min-width: 0; }
+.anime-name { font-weight: 600; font-size: 0.92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.3rem; }
+.anime-meta { font-size: 0.75rem; color: var(--text-muted); }
+.anime-box-office { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--gold); white-space: nowrap; }
+
+/* ══ FOOTER ══ */
+footer { position: relative; border-top: 1px solid var(--border); padding: 4rem 2rem 2.5rem; text-align: center; overflow: hidden; }
+.footer-bg { position: absolute; inset: 0; background-image: url('/static/images/your-name-2.jpg'); background-size: cover; background-position: center 30%; z-index: 0; }
+.footer-bg::after { content: ''; position: absolute; inset: 0; background: rgba(3,5,15,0.88); }
+.footer-inner { position: relative; z-index: 2; }
+.footer-gif { width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(255,0,170,0.35); box-shadow: 0 0 20px rgba(255,0,170,0.2); margin: 0 auto 1.5rem; animation: floatUp 4s ease-in-out infinite; }
+.footer-gif img { width: 100%; height: 100%; object-fit: cover; }
+.footer-logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 900; margin-bottom: 0.75rem; }
+.footer-sub { font-size: 0.82rem; color: var(--text-muted); max-width: 400px; margin: 0 auto 1.5rem; }
+.footer-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.footer-links a { font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: var(--trans); font-family: var(--font-display); }
+.footer-links a:hover { color: var(--cyan); }
+
+/* Floating particles */
+.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle { position: absolute; width: 2px; height: 2px; background: var(--cyan); border-radius: 50%; animation: floatParticle linear infinite; opacity: 0; }
+@keyframes floatParticle {
+  0%   { opacity: 0; transform: translateY(100vh) scale(0); }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.15; }
+  100% { opacity: 0; transform: translateY(-20px) scale(1); }
+}
+
+@media (max-width: 900px) {
+  .hero-gif-jjk, .hero-gif-ds, .hero-char-left { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+<div class="particles" id="particles"></div>
+
+<!-- Animated GIF page background -->
+<div class="gif-page-bg">
+  <img src="/static/images/sky-kimi2.gif" alt="">
+</div>
+
+<div class="page-wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gif-jjk"><img src="/static/images/anime-jujutsu-kaisen.gif" alt="Jujutsu Kaisen"></div>
+    <div class="hero-gif-ds"><img src="/static/images/demon-slayer-9.gif" alt="Demon Slayer"></div>
+    <div class="hero-char-left"><img src="/static/images/tanjiro.jpg" alt="Tanjiro"></div>
+
+    <div class="hero-content">
+      <span class="hero-badge">Data Intelligence Platform</span>
+
+      <h1 class="hero-title">
+        <span class="line1">Decode The</span>
+        <span class="line2">Anime Universe</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Deep analytics on anime box office, ratings, and industry trends.
+        Powered by machine learning. Built for the next generation of fans and researchers.
+      </p>
+
+      <div class="hero-cta">
+        <a href="/dashboard" class="btn btn-primary">Open Dashboard</a>
+        <a href="/predict" class="btn btn-secondary">Predict Box Office</a>
+      </div>
+
+      <div class="hero-stats" id="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-value" id="stat-anime">80</span>
+          <span class="hero-stat-label">Anime Tracked</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" id="stat-bo">$4.7B+</span>
+          <span class="hero-stat-label">Box Office</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" id="stat-years">40+</span>
+          <span class="hero-stat-label">Years of Data</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" id="stat-studios">20+</span>
+          <span class="hero-stat-label">Studios</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="features-header">
+      <p class="features-tag">What's Inside</p>
+      <h2 class="features-title">Four Powerful Modules</h2>
+    </div>
+
+    <div class="features-grid">
+      <a href="/dashboard" class="feature-card" style="--accent: linear-gradient(90deg, #00f5ff, #0088cc)">
+        <div class="feature-card-img"><img src="/static/images/demon-slayer-infinity.jpg" alt="Dashboard"></div>
+        <div class="feature-card-body">
+          <div class="feature-name">Live Dashboard</div>
+          <p class="feature-desc">Interactive charts: top grossing films, revenue by genre and studio, year-over-year industry growth. Drill into any slice of data.</p>
+          <span class="feature-arrow text-cyan">Explore →</span>
+        </div>
+      </a>
+
+      <a href="/insights" class="feature-card" style="--accent: linear-gradient(90deg, #ff00aa, #aa00ff)">
+        <div class="feature-card-img"><img src="/static/images/jjk-poster.jpg" alt="Insights"></div>
+        <div class="feature-card-body">
+          <div class="feature-name">Deep Insights</div>
+          <p class="feature-desc">Correlation analysis between ratings and revenue, profitability leaders, decade comparisons, and studio head-to-head battles.</p>
+          <span class="feature-arrow text-magenta">Discover →</span>
+        </div>
+      </a>
+
+      <a href="/predict" class="feature-card" style="--accent: linear-gradient(90deg, #ffd700, #ff8800)">
+        <div class="feature-card-img" style="background:#03050f; display:flex; align-items:center; justify-content:center;">
+          <img src="/static/images/goku.gif" alt="ML Predictor" style="object-fit:contain; height:160px; width:auto; max-width:100%;">
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-name">ML Predictor</div>
+          <p class="feature-desc">Random Forest model trained on 80 anime. Input genre, budget, and ratings — get a predicted box office with confidence range and ROI.</p>
+          <span class="feature-arrow text-gold">Predict →</span>
+        </div>
+      </a>
+
+      <a href="/dashboard#table" class="feature-card" style="--accent: linear-gradient(90deg, #00ff88, #00ddaa)">
+        <div class="feature-card-img"><img src="/static/images/suzume.jpg" alt="Data Explorer"></div>
+        <div class="feature-card-body">
+          <div class="feature-name">Data Explorer</div>
+          <p class="feature-desc">Search, filter, and sort the full dataset. Filter by genre, studio, decade. Export-ready table with all metadata and computed metrics.</p>
+          <span class="feature-arrow text-green">Browse →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- TOP 10 -->
+  <section class="latest">
+    <div class="latest-bg"></div>
+    <div class="latest-inner">
+      <div class="latest-header">
+        <h2 class="section-title">Top Grossing Anime</h2>
+        <a href="/dashboard" class="btn btn-secondary" style="font-size:0.7rem; padding:0.5rem 1rem">View All →</a>
+      </div>
+      <div class="anime-list" id="anime-list">
+        <div class="spinner-wrap"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-bg"></div>
+    <div class="footer-inner">
+      <div class="footer-gif"><img src="/static/images/hug.gif" alt="anime hug"></div>
+      <div class="footer-logo">ANIME<span class="text-cyan">X</span></div>
+      <p class="footer-sub">Open-source anime data intelligence platform. Data sourced from MyAnimeList, Box Office Mojo &amp; Wikipedia.</p>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/insights">Insights</a>
+        <a href="/predict">Predict</a>
+        <a href="/api/health">API</a>
+      </div>
+      <p class="text-muted" style="font-size:0.72rem">Built with Flask · Pandas · Chart.js</p>
+    </div>
+  </footer>
+
+</div>
+
+<script src="/static/js/utils.js"></script>
+<script>
+(function createParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#00f5ff', '#ff00aa', '#ffd700', '#00ff88'];
+  for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      animation-duration: ${8 + Math.random() * 15}s;
+      animation-delay: ${Math.random() * 12}s;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      width: ${1 + Math.random() * 3}px;
+      height: ${1 + Math.random() * 3}px;
+    `;
+    container.appendChild(p);
+  }
+})();
+
+async function loadHome() {
+  try {
+    const [kpiRes, animeRes] = await Promise.all([
+      API.get('analysis/kpis'),
+      API.get('anime', { sort_by: 'box_office_m_usd', order: 'desc', limit: 10 })
+    ]);
+    const kpi = kpiRes.data;
+    animateCounter('stat-anime',   kpi.total_anime,        '', 0);
+    animateCounter('stat-bo',      kpi.total_box_office_b, '$', 1, 'B+');
+    animateCounter('stat-years',   40,                     '', 0, '+');
+    animateCounter('stat-studios', kpi.studios_covered,    '', 0, '+');
+
+    const list = document.getElementById('anime-list');
+    list.innerHTML = animeRes.data.map((a, i) => {
+      const rankClass = i < 3 ? `rank-${i+1}` : '';
+      const rankLabel = i === 0 ? '#1' : i === 1 ? '#2' : i === 2 ? '#3' : `#${i+1}`;
+      return `
+      <div class="anime-item anim-fadeInUp" style="animation-delay:${i*0.05}s">
+        <span class="anime-rank ${rankClass}">${rankLabel}</span>
+        <div class="anime-info">
+          <div class="anime-name">${a.title}</div>
+          <div class="anime-meta">${a.year} · ${a.primary_genre} · ${a.studio}</div>
+        </div>
+        <div>
+          <div class="anime-box-office">${fmt.money(a.box_office_m_usd)}</div>
+          <div class="text-muted" style="font-size:0.72rem; text-align:right">${a.mal_score} / 10</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch (err) {
+    console.error(err);
+    document.getElementById('anime-list').innerHTML = `<p class="text-muted">Failed to load data. Is the Flask server running?</p>`;
+  }
+}
+
+function animateCounter(id, target, prefix, decimals, suffix = '') {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const duration = 1800;
+  const startTime = performance.now();
+  function update(now) {
+    const p = Math.min((now - startTime) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = target * ease;
+    el.textContent = prefix + val.toFixed(decimals) + suffix;
+    if (p < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+loadHome();
+</script>
+</body>
+</html>

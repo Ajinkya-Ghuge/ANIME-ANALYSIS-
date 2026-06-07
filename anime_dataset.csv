@@ -1,0 +1,81 @@
+title,year,genre,studio,budget_m_usd,box_office_m_usd,mal_score,imdb_score,episodes,type,profitability,profit_m_usd,popularity_index,decade,primary_genre,success_tier,rank
+Dragon Ball Z,1989,Action/Sci-Fi,Toei Animation,25.0,750.0,8.14,8.7,291,Series,30.0,725.0,88.3,1980s,Action,Blockbuster,1
+Demon Slayer: Mugen Train,2020,Action/Fantasy,ufotable,15.4,500.0,8.24,7.8,1,Movie,32.47,484.6,69.5,2020s,Action,Blockbuster,2
+One Piece,1999,Action/Adventure,Toei Animation,80.0,420.0,9.06,9.0,1100,Series,5.25,340.0,72.9,1990s,Action,Blockbuster,3
+Spirited Away,2001,Adventure/Fantasy,Studio Ghibli,15.0,395.8,8.77,8.6,1,Movie,26.39,380.8,67.5,2000s,Adventure,Blockbuster,4
+Your Name,2016,Romance/Fantasy,CoMix Wave Films,2.5,380.1,8.94,8.4,1,Movie,152.04,377.6,68.3,2010s,Romance,Blockbuster,5
+Naruto Shippuden,2007,Action/Adventure,Studio Pierrot,45.0,380.0,8.18,8.5,500,Series,8.44,335.0,59.1,2000s,Action,Blockbuster,6
+Suzume,2022,Adventure/Fantasy,CoMix Wave Films,15.0,309.0,8.42,7.8,1,Movie,20.6,294.0,56.3,2020s,Adventure,Blockbuster,7
+Demon Slayer,2019,Action/Supernatural,ufotable,8.5,245.0,8.53,8.6,44,Series,28.82,236.5,52.5,2010s,Action,Blockbuster,8
+Howl's Moving Castle,2004,Romance/Fantasy,Studio Ghibli,34.0,235.0,8.6,8.2,1,Movie,6.91,201.0,52.5,2000s,Romance,Blockbuster,9
+One Piece Film: Red,2022,Action/Music,Toei Animation,12.0,197.9,7.22,6.8,1,Movie,16.49,185.9,32.9,2020s,Action,Hit,10
+Jujutsu Kaisen 0,2021,Action/Supernatural,MAPPA,6.0,196.2,7.94,7.5,1,Movie,32.7,190.2,41.5,2020s,Action,Hit,11
+Weathering With You,2019,Romance/Fantasy,CoMix Wave Films,3.5,193.2,8.48,7.5,1,Movie,55.2,189.7,47.7,2010s,Romance,Hit,12
+Attack on Titan,2013,Action/Dark Fantasy,WIT Studio/MAPPA,3.0,189.0,9.11,9.0,87,Series,63.0,186.0,55.0,2010s,Action,Hit,13
+Dragon Ball Super,2015,Action/Sci-Fi,Toei Animation,20.0,185.0,6.96,7.5,131,Series,9.25,165.0,28.8,2010s,Action,Hit,14
+Princess Mononoke,1997,Action/Fantasy,Studio Ghibli,23.5,170.0,8.7,8.3,1,Movie,7.23,146.5,48.5,1990s,Action,Hit,15
+The First Slam Dunk,2022,Sports/Drama,Toei Animation,8.0,162.4,9.06,8.0,1,Movie,20.3,154.4,52.2,2020s,Sports,Hit,16
+Jujutsu Kaisen,2020,Action/Supernatural,MAPPA,6.0,132.0,8.73,8.5,47,Series,22.0,126.0,45.8,2020s,Action,Hit,17
+Dragon Ball Super: Broly,2018,Action/Sci-Fi,Toei Animation,8.5,122.0,7.84,7.4,1,Movie,14.35,113.5,34.3,2010s,Action,Hit,18
+Boruto,2017,Action/Adventure,Studio Pierrot,15.0,120.0,5.79,6.5,293,Series,8.0,105.0,9.4,2010s,Action,Hit,19
+My Hero Academia,2016,Action/Superhero,BONES,5.5,118.0,7.96,8.4,138,Series,21.45,112.5,35.4,2010s,Action,Hit,20
+Bleach,2004,Action/Supernatural,Studio Pierrot,6.0,95.0,7.92,8.2,366,Series,15.83,89.0,33.1,2000s,Action,Hit,21
+Fullmetal Alchemist: Brotherhood,2009,Action/Adventure,BONES,2.5,95.0,9.07,9.1,64,Series,38.0,92.5,47.0,2000s,Action,Hit,22
+Hunter x Hunter (2011),2011,Action/Adventure,Madhouse,4.0,88.0,9.06,9.0,148,Series,22.0,84.0,46.3,2010s,Action,Hit,23
+Fairy Tail,2009,Action/Fantasy,A-1 Pictures,8.0,88.0,7.95,8.0,328,Series,11.0,80.0,32.9,2000s,Action,Hit,24
+Evangelion: 3.0+1.0,2021,Sci-Fi/Mecha,Studio Khara,12.5,84.3,8.73,8.0,1,Movie,6.74,71.8,42.0,2020s,Sci-Fi,Hit,25
+Akira,1988,Sci-Fi/Action,TMS Entertainment,11.0,80.0,8.14,8.0,1,Movie,7.27,69.0,34.5,1980s,Sci-Fi,Hit,26
+Sword Art Online,2012,Action/Fantasy,A-1 Pictures,4.0,78.0,7.2,7.7,96,Series,19.5,74.0,23.1,2010s,Action,Hit,27
+Spy x Family,2022,Comedy/Action,WIT Studio/CloverWorks,5.0,78.0,8.17,8.1,37,Series,15.6,73.0,34.7,2020s,Comedy,Hit,28
+Cowboy Bebop,1998,Sci-Fi/Action,Sunrise,3.0,75.0,8.77,8.9,26,Series,25.0,72.0,41.7,1990s,Sci-Fi,Hit,29
+One Piece Film: Z,2012,Action/Adventure,Toei Animation,8.0,74.0,7.57,7.2,1,Movie,9.25,66.0,27.2,2010s,Action,Hit,30
+One Piece Film: Gold,2016,Action/Adventure,Toei Animation,9.5,68.9,7.15,6.9,1,Movie,7.25,59.4,21.7,2010s,Action,Hit,31
+Haikyuu!!,2014,Sports/Drama,Production I.G,3.0,67.0,8.67,8.7,85,Series,22.33,64.0,39.9,2010s,Sports,Hit,32
+Death Note,2006,Thriller/Mystery,Madhouse,1.5,67.0,8.62,9.0,37,Series,44.67,65.5,39.3,2000s,Thriller,Hit,33
+Chainsaw Man,2022,Action/Horror,MAPPA,8.0,64.0,8.35,8.3,12,Series,8.0,56.0,35.8,2020s,Action,Hit,34
+Tokyo Revengers,2021,Action/Thriller,Liden Films,3.0,55.0,7.97,8.1,48,Series,18.33,52.0,30.5,2020s,Action,Hit,35
+Re:Zero,2016,Fantasy/Thriller,White Fox,3.0,55.0,8.27,8.5,50,Series,18.33,52.0,34.1,2010s,Fantasy,Hit,36
+Wolf Children,2012,Fantasy/Slice-of-Life,Madhouse,5.0,52.0,8.43,8.0,1,Movie,10.4,47.0,35.8,2010s,Fantasy,Hit,37
+Dragon Ball Z: Battle of Gods,2013,Action/Sci-Fi,Toei Animation,6.0,51.8,7.41,6.9,1,Movie,8.63,45.8,23.5,2010s,Action,Hit,38
+Tokyo Ghoul,2014,Action/Horror,Pierrot,2.5,48.0,7.79,7.9,48,Series,19.2,45.5,27.8,2010s,Action,Solid,39
+That Time I Got Reincarnated as a Slime,2018,Fantasy/Isekai,8bit,3.5,48.0,8.09,8.0,48,Series,13.71,44.5,31.4,2010s,Fantasy,Solid,40
+Vinland Saga,2019,Action/Historical,WIT Studio/MAPPA,3.5,45.0,8.72,8.8,48,Series,12.86,41.5,38.7,2010s,Action,Solid,41
+Seven Deadly Sins,2014,Action/Fantasy,A-1 Pictures,3.0,45.0,7.76,8.0,100,Series,15.0,42.0,27.2,2010s,Action,Solid,42
+Sword Art Online: Alicization,2018,Action/Fantasy,A-1 Pictures,5.0,42.0,7.55,7.5,47,Series,8.4,37.0,24.4,2010s,Action,Solid,43
+Black Clover,2017,Action/Fantasy,Studio Pierrot,4.0,42.0,8.13,7.8,170,Series,10.5,38.0,31.4,2010s,Action,Solid,44
+Steins;Gate,2011,Sci-Fi/Thriller,White Fox,1.2,41.0,9.07,8.8,24,Series,34.17,39.8,42.6,2010s,Sci-Fi,Solid,45
+Fate/stay night: Heaven's Feel III,2020,Action/Fantasy,ufotable,8.0,40.2,8.44,7.9,1,Movie,5.03,32.2,35.0,2020s,Action,Solid,46
+Neon Genesis Evangelion,1995,Mecha/Psychological,Gainax,3.0,40.0,8.51,8.5,26,Series,13.33,37.0,35.8,1990s,Mecha,Solid,47
+Violet Evergarden,2018,Drama/Fantasy,Kyoto Animation,4.5,38.0,8.67,8.7,13,Series,8.44,33.5,37.6,2010s,Drama,Solid,48
+The Promised Neverland,2019,Thriller/Horror,CloverWorks,2.0,38.0,8.54,8.5,23,Series,19.0,36.0,36.0,2010s,Thriller,Solid,49
+Dr. Stone,2019,Sci-Fi/Adventure,TMS Entertainment,3.0,38.0,8.3,8.3,56,Series,12.67,35.0,33.1,2010s,Sci-Fi,Solid,50
+Belle,2021,Music/Drama,Studio Chizu,12.0,37.8,7.35,7.3,1,Movie,3.15,25.8,21.6,2020s,Music,Solid,51
+My Neighbor Totoro,1988,Fantasy/Slice-of-Life,Studio Ghibli,3.7,36.2,8.49,8.1,1,Movie,9.78,32.5,35.3,1980s,Fantasy,Solid,52
+Mob Psycho 100,2016,Action/Comedy,BONES,2.0,35.0,8.5,8.7,37,Series,17.5,33.0,35.3,2010s,Action,Solid,53
+Rising of the Shield Hero,2019,Fantasy/Isekai,Kinema Citrus,2.5,35.0,7.93,8.0,50,Series,14.0,32.5,28.4,2010s,Fantasy,Solid,54
+My Hero Academia: Heroes Rising,2019,Action/Superhero,BONES,7.5,33.5,7.68,7.5,1,Movie,4.47,26.0,25.3,2010s,Action,Solid,55
+The Quintessential Quintuplets,2019,Romance/Comedy,Tezuka Productions,2.0,32.0,7.62,7.5,24,Series,16.0,30.0,24.4,2010s,Romance,Solid,56
+Danmachi,2015,Action/Fantasy,J.C.Staff,2.0,32.0,7.42,7.5,49,Series,16.0,30.0,22.0,2010s,Action,Solid,57
+Overlord,2015,Fantasy/Isekai,Madhouse,2.0,32.0,7.88,7.9,52,Series,16.0,30.0,27.6,2010s,Fantasy,Solid,58
+Parasyte: The Maxim,2014,Sci-Fi/Horror,Madhouse,1.8,32.0,8.35,8.3,24,Series,17.78,30.2,33.2,2010s,Sci-Fi,Solid,59
+Sword Art Online: Ordinal Scale,2017,Action/Sci-Fi,A-1 Pictures,10.0,29.3,7.41,6.8,1,Movie,2.93,19.3,21.7,2010s,Action,Solid,60
+Made in Abyss,2017,Adventure/Dark Fantasy,Kinema Citrus,1.5,29.0,8.69,8.6,25,Series,19.33,27.5,37.1,2010s,Adventure,Solid,61
+Konosuba,2016,Fantasy/Comedy,Studio Deen,1.2,28.0,8.17,8.2,20,Series,23.33,26.8,30.7,2010s,Fantasy,Solid,62
+Fruits Basket (2019),2019,Romance/Drama,TMS Entertainment,2.5,28.0,8.32,8.4,63,Series,11.2,25.5,32.5,2010s,Romance,Solid,63
+Blue Exorcist,2011,Action/Supernatural,A-1 Pictures,2.0,28.0,7.49,7.5,37,Series,14.0,26.0,22.5,2010s,Action,Solid,64
+A Silent Voice,2016,Drama/Romance,Kyoto Animation,1.5,27.7,8.95,8.1,1,Movie,18.47,26.2,40.1,2010s,Drama,Solid,65
+No Game No Life,2014,Fantasy/Comedy,Madhouse,1.5,25.0,8.03,7.9,12,Series,16.67,23.5,28.8,2010s,Fantasy,Solid,66
+Castle in the Sky,1986,Adventure/Fantasy,Studio Ghibli,2.1,24.8,8.35,8.1,1,Movie,11.81,22.7,32.6,1980s,Adventure,Solid,67
+Black Butler,2008,Action/Supernatural,A-1 Pictures,1.5,22.0,7.68,8.0,36,Series,14.67,20.5,24.4,2000s,Action,Solid,68
+Tower of God,2020,Action/Fantasy,Telecom Animation Film,4.0,22.0,7.55,7.6,13,Series,5.5,18.0,22.8,2020s,Action,Solid,69
+Noragami,2014,Action/Supernatural,Bones,1.5,22.0,8.05,8.1,25,Series,14.67,20.5,28.8,2010s,Action,Solid,70
+Toradora!,2008,Romance/Comedy,J.C.Staff,1.5,20.0,8.11,8.3,25,Series,13.33,18.5,29.4,2000s,Romance,Solid,71
+Summer Wars,2009,Sci-Fi/Family,Madhouse,4.5,18.6,8.04,7.7,1,Movie,4.13,14.1,28.4,2000s,Sci-Fi,Solid,72
+Classroom of the Elite,2017,Psychological/Drama,Lerche,1.5,18.0,7.53,7.8,37,Series,12.0,16.5,22.2,2010s,Psychological,Solid,73
+Clannad: After Story,2008,Drama/Romance,Kyoto Animation,2.0,18.0,8.93,8.7,24,Series,9.0,16.0,39.1,2000s,Drama,Solid,74
+Sword Art Online: GGO,2018,Action/Sci-Fi,Studio 3Hz,2.5,18.0,6.78,6.8,12,Series,7.2,15.5,13.2,2010s,Action,Solid,75
+Nausicaä of the Valley,1984,Sci-Fi/Fantasy,Studio Ghibli,1.5,14.9,8.4,8.1,1,Movie,9.93,13.4,32.5,1980s,Sci-Fi,Solid,76
+Ghost in the Shell,1995,Sci-Fi/Action,Production I.G,10.0,10.0,8.28,8.0,1,Movie,1.0,0.0,30.6,1990s,Sci-Fi,Solid,77
+Bubble,2022,Action/Romance,WIT Studio,20.0,8.5,6.95,5.8,1,Movie,0.42,-11.5,14.5,2020s,Action,Moderate,78
+The Girl Who Leapt Through Time,2006,Sci-Fi/Romance,Madhouse,2.0,5.4,8.12,7.7,1,Movie,2.7,3.4,28.3,2000s,Sci-Fi,Moderate,79
+Grave of the Fireflies,1988,Drama/War,Studio Ghibli,3.2,2.3,8.49,8.5,1,Movie,0.72,-0.9,32.5,1980s,Drama,Moderate,80

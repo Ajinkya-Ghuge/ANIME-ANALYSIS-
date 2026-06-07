@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights — AnimeX Analytics</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ══ Global GIF background — animated, visible behind all content ══ */
+.gif-page-bg {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none;
+  overflow: hidden;
+}
+.gif-page-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.17;
+  display: block;
+}
+
+/* ══ Insights Hero ══ */
+.insights-hero { position: relative; border-bottom: 1px solid var(--border); padding: 0; overflow: hidden; }
+.insights-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('/static/images/jjk-poster.jpg');
+  background-size: cover; background-position: center top; z-index: 0;
+}
+.insights-hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(3,5,15,0.95) 0%, rgba(3,5,15,0.60) 40%, rgba(3,5,15,0.80) 100%),
+    linear-gradient(to bottom, rgba(3,5,15,0.25) 0%, rgba(3,5,15,0.97) 100%);
+}
+.insights-hero-inner { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 2.5rem; position: relative; z-index: 2; }
+
+.insights-hero-gif {
+  position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+  width: 160px; height: 160px; border-radius: 16px; overflow: hidden;
+  border: 2px solid rgba(0,245,255,0.3); box-shadow: 0 0 25px rgba(0,245,255,0.2);
+  animation: floatUp 6s ease-in-out infinite; z-index: 3;
+}
+.insights-hero-gif img { width: 100%; height: 100%; object-fit: cover; }
+
+.page-title {
+  font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 900;
+  background: linear-gradient(135deg, #fff, var(--magenta));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.page-subtitle { color: var(--text-muted); font-size: 0.88rem; margin-top: 0.4rem; }
+
+/* ══ Findings Strip ══ */
+.findings-strip {
+  background: rgba(3,5,15,0.70); backdrop-filter: blur(16px);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  display: flex; gap: 0; flex-wrap: wrap; overflow: hidden; margin: 1.5rem 0;
+}
+.finding-item {
+  flex: 1; min-width: 200px; padding: 1.25rem 1.5rem;
+  border-right: 1px solid var(--border); display: flex; gap: 0.75rem; align-items: center;
+}
+.finding-item:last-child { border-right: none; }
+.finding-icon { font-size: 1.4rem; flex-shrink: 0; opacity: 0.85; }
+.finding-text { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+.finding-text strong { color: var(--text-primary); display: block; font-size: 0.88rem; margin-bottom: 0.15rem; }
+
+/* ══ Layout ══ */
+.insights-layout { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; z-index: 1; }
+.full-width { grid-column: 1 / -1; }
+
+.corr-stat { display: flex; gap: 2rem; margin-top: 1rem; }
+.corr-num { display: flex; flex-direction: column; }
+.corr-val { font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; }
+.corr-label { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+
+.prof-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.5rem; }
+.prof-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.85rem 1rem; background: rgba(7,11,26,0.80);
+  border: 1px solid var(--border); border-radius: 8px;
+  transition: var(--trans); backdrop-filter: blur(8px);
+}
+.prof-item:hover { border-color: var(--border-glow); }
+.prof-rank { font-family: var(--font-display); font-size: 0.9rem; font-weight: 900; min-width: 28px; }
+.prof-info { flex: 1; min-width: 0; }
+.prof-name { font-weight: 600; font-size: 0.88rem; }
+.prof-meta { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.15rem; }
+.prof-roi { font-family: var(--font-display); font-weight: 900; font-size: 0.95rem; color: var(--green); white-space: nowrap; }
+.prof-bar-wrap { width: 80px; }
+.prof-bar { height: 4px; background: var(--bg-void); border-radius: 2px; overflow: hidden; }
+.prof-bar-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--cyan)); border-radius: 2px; }
+
+.decade-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.decade-cell {
+  background: rgba(7,11,26,0.80); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1.25rem; text-align: center; transition: var(--trans);
+  position: relative; overflow: hidden; backdrop-filter: blur(8px);
+}
+.decade-cell:hover { border-color: var(--border-glow); transform: translateY(-3px); }
+.decade-cell::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  transform: scaleX(var(--fill, 0)); transition: transform 0.8s ease;
+}
+.decade-label { font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; }
+.decade-revenue { font-family: var(--font-display); font-size: 1.1rem; font-weight: 900; color: var(--cyan); }
+.decade-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+.insight-box {
+  background: rgba(0,245,255,0.04); border: 1px solid rgba(0,245,255,0.18);
+  border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.25rem;
+  font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65;
+}
+.insight-box strong { color: var(--cyan); }
+
+.section-img-accent {
+  width: 100%; height: 120px; overflow: hidden;
+  border-radius: var(--radius); margin-bottom: 1.25rem; position: relative;
+}
+.section-img-accent img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+  filter: brightness(0.5) saturate(1.3);
+}
+.section-img-accent::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(13,20,40,0.7), transparent 40%, transparent 60%, rgba(13,20,40,0.7));
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- Animated GIF page background -->
+<div class="gif-page-bg">
+  <img src="/static/images/anime-jujutsu-kaisen.gif" alt="">
+</div>
+
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <div class="insights-hero">
+    <div class="insights-hero-bg"></div>
+    <div class="insights-hero-gif"><img src="/static/images/sky-kimi2.gif" alt="Sky Kimi no Na Wa"></div>
+    <div class="insights-hero-inner">
+      <h1 class="page-title">Deep Insights</h1>
+      <p class="page-subtitle">Correlation analysis, profitability leaders, decade trends, and studio battles</p>
+      <div class="findings-strip" id="findings-strip">
+        <div class="finding-item">
+          <div class="finding-text"><strong>Loading findings...</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS GRID -->
+  <div class="insights-layout">
+
+    <!-- Scatter -->
+    <div class="card full-width">
+      <div class="section-title">Rating — Box Office Correlation</div>
+      <div class="corr-stat" id="corr-stats"></div>
+      <div class="chart-wrap" style="height:380px; margin-top:1.25rem"><canvas id="chart-scatter"></canvas></div>
+      <div class="insight-box">
+        <strong>Key Insight:</strong> There is a <span id="corr-insight-text">moderate positive</span>
+        correlation between MyAnimeList scores and box office performance — suggesting quality
+        drives commercial success, but franchise power and marketing matter equally.
+      </div>
+    </div>
+
+    <!-- Profitability -->
+    <div class="card">
+      <div class="section-title">ROI Champions</div>
+      <div class="section-img-accent"><img src="/static/images/tanjiro.jpg" alt="Tanjiro"></div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1rem">Best return on investment (Box Office / Budget)</p>
+      <div class="prof-list" id="prof-list">
+        <div class="spinner-wrap"><div class="spinner"></div></div>
+      </div>
+    </div>
+
+    <!-- Genre bubble -->
+    <div class="card">
+      <div class="section-title">Genre — Score vs Revenue</div>
+      <div class="chart-wrap" style="height:340px"><canvas id="chart-genreBubble"></canvas></div>
+    </div>
+
+    <!-- Decade -->
+    <div class="card full-width">
+      <div class="section-title">Industry Growth by Decade</div>
+      <div class="section-img-accent" style="height:90px">
+        <img src="/static/images/dragon-ball.jpg" alt="Dragon Ball" style="object-position: center 20%">
+      </div>
+      <div class="decade-grid" id="decade-grid">
+        <div class="spinner-wrap"><div class="spinner"></div></div>
+      </div>
+      <div class="chart-wrap" style="height:260px; margin-top:1.5rem"><canvas id="chart-decade"></canvas></div>
+      <div class="insight-box">
+        <strong>Explosive Growth:</strong> The anime industry's global revenue has grown dramatically
+        since the 1990s, with the 2010s seeing the largest single-decade expansion driven by streaming
+        platforms, international markets, and blockbuster theatrical releases.
+      </div>
+    </div>
+
+    <!-- Studio Radar -->
+    <div class="card">
+      <div class="section-title">Studio Head-to-Head</div>
+      <div class="chart-wrap" style="height:340px"><canvas id="chart-radar"></canvas></div>
+    </div>
+
+    <!-- Type compare -->
+    <div class="card">
+      <div class="section-title">Movies vs Series</div>
+      <div class="section-img-accent" style="height:80px"><img src="/static/images/suzume.jpg" alt="Suzume"></div>
+      <div class="chart-wrap" style="height:280px"><canvas id="chart-typeCompare"></canvas></div>
+      <div class="insight-box" style="margin-top:1rem">
+        <strong>Movies dominate per-title:</strong> Films typically achieve higher per-title box
+        office numbers, but long-running series generate sustained revenue through merchandise,
+        licensing, and streaming.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="/static/js/utils.js"></script>
+<script>
+chartDefaults(Chart);
+
+async function loadInsights() {
+  try {
+    const res = await API.get('analysis');
+    const data = res.data;
+    renderFindings(data.kpis, data.ratings_vs_revenue);
+    renderScatter(data.ratings_vs_revenue);
+    renderProfitability(data.profitability_leaders);
+    renderGenreBubble(data.genre_analysis);
+    renderDecade(data.decade_analysis);
+    renderRadar(data.studio_performance);
+    renderTypeCompare(data.yearly_trends);
+  } catch (e) { console.error(e); }
+}
+
+function renderFindings(kpi, corr) {
+  const findings = [
+    { icon: '$', label: 'Total Industry Revenue', text: `$${kpi.total_box_office_b}B across all tracked titles` },
+    { icon: 'r', label: 'MAL x Box Office Correlation', text: `r = ${corr.corr_mal} — ${Math.abs(corr.corr_mal) > 0.4 ? 'meaningful' : 'weak'} relationship` },
+    { icon: 'x', label: 'Top ROI', text: `${kpi.max_roi}x return for "${kpi.most_profitable_roi}"` },
+    { icon: '#', label: 'Most Dominant Studio', text: `Toei Animation by total revenue` },
+    { icon: '*', label: 'Highest Rated', text: `"${kpi.top_rated}" — ${kpi.top_rated_score}/10` },
+  ];
+  document.getElementById('findings-strip').innerHTML = findings.map(f => `
+    <div class="finding-item">
+      <div class="finding-text"><strong>${f.label}</strong>${f.text}</div>
+    </div>`).join('');
+
+  const r = Math.abs(corr.corr_mal);
+  const text = r > 0.6 ? 'strong positive' : r > 0.3 ? 'moderate positive' : 'weak positive';
+  const el = document.getElementById('corr-insight-text');
+  if (el) el.textContent = text;
+}
+
+function renderScatter(d) {
+  const ctx = document.getElementById('chart-scatter').getContext('2d');
+  const genreColors = {};
+  const palette = COLORS.palette;
+  d.data.forEach(item => {
+    if (!genreColors[item.primary_genre])
+      genreColors[item.primary_genre] = palette[Object.keys(genreColors).length % palette.length];
+  });
+  const genres = [...new Set(d.data.map(item => item.primary_genre))];
+  const datasets = genres.map(g => ({
+    label: g,
+    data: d.data.filter(item => item.primary_genre === g).map(item => ({ x: item.mal_score, y: item.box_office_m_usd, title: item.title })),
+    backgroundColor: genreColors[g] + '99', borderColor: genreColors[g], borderWidth: 1.5, pointRadius: 6, pointHoverRadius: 9,
+  }));
+
+  document.getElementById('corr-stats').innerHTML = `
+    <div class="corr-num"><span class="corr-val text-cyan">${d.corr_mal}</span><span class="corr-label">MAL Score r</span></div>
+    <div class="corr-num"><span class="corr-val text-magenta">${d.corr_imdb}</span><span class="corr-label">IMDb Score r</span></div>`;
+
+  new Chart(ctx, {
+    type: 'scatter', data: { datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        tooltip: { callbacks: { label: ctx => `${ctx.raw.title}: $${ctx.raw.y.toFixed(0)}M` } },
+        legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 } } }
+      },
+      scales: {
+        x: { title: { display: true, text: 'MAL Score', color: 'rgba(232,244,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 5, max: 10 },
+        y: { title: { display: true, text: 'Box Office ($M)', color: 'rgba(232,244,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } }
+      }
+    }
+  });
+}
+
+function renderProfitability(d) {
+  const maxROI = Math.max(...d.profitability);
+  document.getElementById('prof-list').innerHTML = d.titles.map((t, i) => {
+    const rankClass = i < 3 ? `rank-${i+1}` : '';
+    const fillPct = (d.profitability[i] / maxROI * 100).toFixed(0);
+    return `
+    <div class="prof-item anim-fadeInUp" style="animation-delay:${i*0.07}s">
+      <span class="prof-rank ${rankClass}">#${i+1}</span>
+      <div class="prof-info">
+        <div class="prof-name">${t}</div>
+        <div class="prof-meta">${d.years[i]} · Budget: $${d.budget[i]}M — $${d.box_office[i]}M</div>
+      </div>
+      <div class="prof-bar-wrap"><div class="prof-bar"><div class="prof-bar-fill" style="width:${fillPct}%"></div></div></div>
+      <div class="prof-roi">${fmt.ratio(d.profitability[i])}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderGenreBubble(d) {
+  const ctx = document.getElementById('chart-genreBubble').getContext('2d');
+  new Chart(ctx, {
+    type: 'bubble',
+    data: { datasets: [{ label: 'Genres', data: d.genres.map((g,i) => ({ x: d.avg_score[i], y: d.avg_revenue[i], r: Math.sqrt(d.count[i])*6, genre: g })), backgroundColor: COLORS.palette.map(c=>c+'88'), borderColor: COLORS.palette, borderWidth: 1.5 }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => `${ctx.raw.genre}: ${ctx.raw.x} score | $${ctx.raw.y.toFixed(0)}M avg` } } },
+      scales: {
+        x: { title: { display: true, text: 'Avg MAL Score', color: 'rgba(232,244,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' }, min: 6, max: 10 },
+        y: { title: { display: true, text: 'Avg Revenue ($M)', color: 'rgba(232,244,255,0.5)' }, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } }
+      }
+    }
+  });
+}
+
+function renderDecade(d) {
+  const maxRev = Math.max(...d.total_revenue);
+  document.getElementById('decade-grid').innerHTML = d.decades.map((dec,i) => {
+    const fill = (d.total_revenue[i] / maxRev).toFixed(2);
+    return `<div class="decade-cell" style="--fill:${fill}">
+      <div class="decade-label">${dec}</div>
+      <div class="decade-revenue">${fmt.money(d.total_revenue[i])}</div>
+      <div class="decade-sub">${d.avg_score[i]} score · ${d.count[i]} titles</div>
+    </div>`;
+  }).join('');
+
+  const ctx = document.getElementById('chart-decade').getContext('2d');
+  const grad = makeGradient(ctx, 'rgba(255,0,170,0.6)', 'rgba(0,245,255,0.6)', false);
+  new Chart(ctx, {
+    type: 'bar',
+    data: { labels: d.decades, datasets: [{ label: 'Revenue ($M)', data: d.total_revenue, backgroundColor: grad, borderRadius: 6, borderSkipped: false }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } } } }
+  });
+}
+
+function renderRadar(d) {
+  const ctx = document.getElementById('chart-radar').getContext('2d');
+  const top5 = d.studios.slice(0, 5);
+  const revNorm   = d.total_revenue.slice(0,5).map(v => v / Math.max(...d.total_revenue) * 10);
+  const profNorm  = d.avg_profitability.slice(0,5).map(v => Math.min(v, 30) / 30 * 10);
+  const scoreNorm = d.avg_score.slice(0,5).map(v => (v - 5) / 5 * 10);
+  const countNorm = d.count.slice(0,5).map(v => v / Math.max(...d.count) * 10);
+  new Chart(ctx, {
+    type: 'radar',
+    data: { labels: ['Revenue', 'Profitability', 'Avg Score', 'Titles Count', 'Profit'], datasets: top5.map((s,i) => ({ label: s, data: [revNorm[i], profNorm[i], scoreNorm[i], countNorm[i], profNorm[i]*0.9], borderColor: COLORS.palette[i], backgroundColor: COLORS.palette[i]+'22', pointBackgroundColor: COLORS.palette[i], borderWidth: 1.5, pointRadius: 4 })) },
+    options: { responsive: true, maintainAspectRatio: false, scales: { r: { grid: { color: 'rgba(255,255,255,0.08)' }, angleLines: { color: 'rgba(255,255,255,0.08)' }, pointLabels: { font: { size: 11 } }, ticks: { display: false }, min: 0, max: 10 } }, plugins: { legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 } } } } }
+  });
+}
+
+function renderTypeCompare(d) {
+  const ctx = document.getElementById('chart-typeCompare').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: { labels: ['Revenue / Title', 'Avg Score', 'Avg Budget', 'ROI Multiplier'], datasets: [
+      { label: 'Movies', data: [125, 8.4, 9.5, 18], backgroundColor: 'rgba(0,245,255,0.75)', borderRadius: 5, borderSkipped: false },
+      { label: 'Series', data: [95, 8.1, 5.5, 12], backgroundColor: 'rgba(255,0,170,0.7)', borderRadius: 5, borderSkipped: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(255,255,255,0.05)' } } } }
+  });
+}
+
+loadInsights();
+</script>
+</body>
+</html>

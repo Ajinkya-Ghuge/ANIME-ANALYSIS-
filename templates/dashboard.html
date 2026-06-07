@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — AnimeX Analytics</title>
+<link rel="stylesheet" href="/static/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ══ Global GIF background — animated, visible behind all content ══ */
+.gif-page-bg {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none;
+  overflow: hidden;
+}
+.gif-page-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.16;
+  display: block;
+}
+
+/* ══ Dashboard Header ══ */
+.dash-header { position: relative; border-bottom: 1px solid var(--border); padding: 0; overflow: hidden; }
+.dash-header-bg {
+  position: absolute; inset: 0;
+  background-image: url('/static/images/demon-slayer-infinity.jpg');
+  background-size: cover; background-position: center 25%; z-index: 0;
+}
+.dash-header-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(3,5,15,0.92) 0%, rgba(3,5,15,0.55) 50%, rgba(3,5,15,0.80) 100%),
+    linear-gradient(to bottom, rgba(3,5,15,0.20) 0%, rgba(3,5,15,0.96) 100%);
+}
+.dash-header-inner { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem; position: relative; z-index: 2; }
+.dash-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+.page-title {
+  font-family: var(--font-display); font-size: 1.8rem; font-weight: 900;
+  background: linear-gradient(135deg, #fff, var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.page-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-top: 0.35rem; }
+
+.dash-header-gif {
+  position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+  width: 140px; height: 140px; border-radius: 12px; overflow: hidden;
+  border: 2px solid rgba(255,0,170,0.3); box-shadow: 0 0 20px rgba(255,0,170,0.2);
+  animation: floatUp 5s ease-in-out infinite; z-index: 3;
+}
+.dash-header-gif img { width: 100%; height: 100%; object-fit: cover; }
+
+.filter-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: flex-end; margin-top: 1.75rem; }
+.filter-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.filter-label { font-size: 0.65rem; font-family: var(--font-display); letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+.filter-group .input-field { width: 170px; }
+
+/* ══ KPI Row ══ */
+.kpi-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem; padding: 1.5rem 2rem; max-width: 1400px; margin: 0 auto;
+  position: relative; z-index: 1;
+}
+
+/* ══ Charts Layout ══ */
+.charts-layout {
+  max-width: 1400px; margin: 0 auto;
+  padding: 0 2rem 3rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.chart-full { grid-column: 1 / -1; }
+
+/* ══ Table Section ══ */
+.table-section { max-width: 1400px; margin: 0 auto; padding: 0 2rem 3rem; position: relative; z-index: 1; }
+.table-controls { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.25rem; }
+.search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 350px; }
+.search-wrap .input-field { padding-left: 2.5rem; }
+.search-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem; pointer-events: none; }
+.table-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; backdrop-filter: blur(12px); }
+.table-scroll { overflow-x: auto; max-height: 500px; overflow-y: auto; }
+.score-bar { display: flex; align-items: center; gap: 0.5rem; }
+.score-track { width: 60px; height: 4px; background: var(--bg-deep); border-radius: 2px; overflow: hidden; }
+.score-fill { height: 100%; background: linear-gradient(90deg, var(--cyan), var(--magenta)); border-radius: 2px; }
+
+/* ══ Anime strip divider ══ */
+.anime-strip { width: 100%; height: 200px; position: relative; overflow: hidden; margin: 1.5rem 0; }
+.anime-strip-img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; filter: brightness(0.35) saturate(1.2); }
+.anime-strip::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(3,5,15,0.95) 0%, transparent 30%, transparent 70%, rgba(3,5,15,0.95) 100%),
+    linear-gradient(to bottom, rgba(3,5,15,0.6) 0%, transparent 40%, transparent 60%, rgba(3,5,15,0.6) 100%);
+}
+.anime-strip-label {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2;
+  font-family: var(--font-display); font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(0,245,255,0.3));
+}
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<!-- Animated GIF page background -->
+<div class="gif-page-bg">
+  <img src="/static/images/demon-slayer-67.gif" alt="">
+</div>
+
+<div class="page-wrapper">
+
+  <!-- HEADER -->
+  <div class="dash-header">
+    <div class="dash-header-bg"></div>
+    <div class="dash-header-gif"><img src="/static/images/demon-slayer-67.gif" alt="Demon Slayer"></div>
+    <div class="dash-header-inner">
+      <div class="dash-title-row">
+        <div>
+          <h1 class="page-title">Analytics Dashboard</h1>
+          <p class="page-subtitle">Real-time insights across 80 anime titles · Updated 2024</p>
+        </div>
+        <a href="/insights" class="btn btn-secondary">Deep Insights →</a>
+      </div>
+      <div class="filter-bar" id="filter-bar">
+        <div class="filter-group">
+          <label class="filter-label">Genre</label>
+          <select class="input-field" id="filter-genre" onchange="applyFilters()"><option value="">All Genres</option></select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Studio</label>
+          <select class="input-field" id="filter-studio" onchange="applyFilters()"><option value="">All Studios</option></select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Sort By</label>
+          <select class="input-field" id="sort-by" onchange="applyFilters()">
+            <option value="box_office_m_usd">Box Office</option>
+            <option value="mal_score">MAL Score</option>
+            <option value="profitability">ROI</option>
+            <option value="year">Year</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary" onclick="resetFilters()" style="align-self:flex-end">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-row" id="kpi-row">
+    <div class="spinner-wrap" style="grid-column:1/-1"><div class="spinner"></div></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts-layout">
+    <div class="card chart-full">
+      <div class="section-title">Top 15 Grossing Anime</div>
+      <div class="chart-wrap" style="height:320px"><canvas id="chart-topGrossing"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Revenue Trend by Year</div>
+      <div class="chart-wrap" style="height:260px"><canvas id="chart-trends"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Revenue by Genre</div>
+      <div class="chart-wrap" style="height:260px"><canvas id="chart-genre"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Studio Performance (Top 10)</div>
+      <div class="chart-wrap" style="height:280px"><canvas id="chart-studio"></canvas></div>
+    </div>
+    <div class="card" style="display:flex; flex-direction:column; align-items:center">
+      <div class="section-title" style="width:100%">Success Tier Distribution</div>
+      <div class="chart-wrap" style="height:280px; max-width:300px; width:100%"><canvas id="chart-donut"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Divider strip -->
+  <div class="anime-strip">
+    <img class="anime-strip-img" src="/static/images/dragon-ball.jpg" alt="Dragon Ball">
+    <span class="anime-strip-label">Full Dataset Explorer</span>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-section" id="table">
+    <div class="table-controls">
+      <div class="section-title" style="margin-bottom:0">Full Dataset</div>
+      <div class="search-wrap" style="margin-left:auto">
+        <span class="search-icon">&#x1F50D;</span>
+        <input class="input-field" id="search-input" type="text" placeholder="Search anime..." oninput="debounce(applyFilters, 300)()">
+      </div>
+      <span id="row-count" class="text-muted" style="font-size:0.8rem; white-space:nowrap"></span>
+    </div>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table class="data-table" id="data-table">
+          <thead>
+            <tr>
+              <th onclick="sortTable('rank')" class="sort-desc">#</th>
+              <th onclick="sortTable('title')">Title</th>
+              <th onclick="sortTable('year')">Year</th>
+              <th onclick="sortTable('primary_genre')">Genre</th>
+              <th onclick="sortTable('studio')">Studio</th>
+              <th onclick="sortTable('box_office_m_usd')">Box Office</th>
+              <th onclick="sortTable('budget_m_usd')">Budget</th>
+              <th onclick="sortTable('profitability')">ROI</th>
+              <th onclick="sortTable('mal_score')">MAL Score</th>
+              <th onclick="sortTable('success_tier')">Tier</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr><td colspan="10" style="text-align:center; padding:3rem"><div class="spinner" style="margin:auto"></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="/static/js/utils.js"></script>
+<script>
+chartDefaults(Chart);
+let allData = [], sortKey = 'rank', sortAsc = true, charts = {};
+
+function debounce(fn, wait) {
+  let t;
+  return function(...args) { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+}
+
+async function initDashboard() {
+  try {
+    const [filterRes, analysisRes, animeRes] = await Promise.all([
+      API.get('anime/filters'), API.get('analysis'), API.get('anime', { limit: 80 })
+    ]);
+    const { genres, studios } = filterRes.data;
+    const genSel = document.getElementById('filter-genre');
+    const stuSel = document.getElementById('filter-studio');
+    genres.forEach(g => genSel.add(new Option(g, g)));
+    studios.forEach(s => stuSel.add(new Option(s, s)));
+    allData = animeRes.data;
+    renderKPIs(analysisRes.data.kpis);
+    renderCharts(analysisRes.data);
+    renderTable(allData);
+  } catch (err) {
+    console.error(err);
+    document.getElementById('kpi-row').innerHTML =
+      `<p class="text-muted" style="grid-column:1/-1; text-align:center; padding:2rem">Could not connect to Flask API. Run <code>python app.py</code></p>`;
+  }
+}
+
+function renderKPIs(kpi) {
+  const kpis = [
+    { label:'Total Box Office',      value: `$${kpi.total_box_office_b}B`,             sub: 'Combined revenue' },
+    { label:'Highest Grossing',      value: kpi.highest_grossing.split(':')[0],         sub: `$${kpi.highest_grossing_bo}M` },
+    { label:'Avg MAL Score',         value: kpi.avg_mal_score,                          sub: 'Out of 10.0' },
+    { label:'Most Profitable ROI',   value: `${kpi.max_roi}x`,                          sub: kpi.most_profitable_roi },
+    { label:'Studios Covered',       value: kpi.studios_covered,                        sub: kpi.years_covered },
+    { label:'Blockbusters ($200M+)', value: kpi.blockbusters,                           sub: 'Major hits' },
+  ];
+  document.getElementById('kpi-row').innerHTML = kpis.map((k, i) => `
+    <div class="kpi-card anim-fadeInUp" style="animation-delay:${i*0.08}s">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-sub">${k.sub}</div>
+    </div>`).join('');
+}
+
+function renderCharts(data) {
+  buildTopGrossing(data.top_grossing);
+  buildTrends(data.yearly_trends);
+  buildGenre(data.genre_analysis);
+  buildStudio(data.studio_performance);
+  buildDonut(data.success_distribution);
+}
+
+function buildTopGrossing(d) {
+  const ctx = document.getElementById('chart-topGrossing').getContext('2d');
+  const grad = makeGradient(ctx, 'rgba(0,245,255,0.85)', 'rgba(255,0,170,0.6)', false);
+  charts.topGrossing = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: d.labels, datasets: [{ label: 'Box Office ($M)', data: d.box_office, backgroundColor: grad, borderRadius: 6, borderSkipped: false }] },
+    options: {
+      responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` $${ctx.raw.toFixed(0)}M  ·  ${d.mal_scores[ctx.dataIndex]} score` } } },
+      scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } }, y: { grid: { display: false }, ticks: { font: { size: 11 } } } }
+    }
+  });
+}
+
+function buildTrends(d) {
+  const ctx = document.getElementById('chart-trends').getContext('2d');
+  const gradRev = makeGradient(ctx, 'rgba(0,245,255,0.3)', 'rgba(0,245,255,0.02)');
+  charts.trends = new Chart(ctx, {
+    type: 'line',
+    data: { labels: d.years, datasets: [
+      { label: 'Revenue ($M)', data: d.total_revenue, borderColor: COLORS.cyan, backgroundColor: gradRev, fill: true, tension: 0.4, pointBackgroundColor: COLORS.cyan, pointRadius: 4, yAxisID: 'y' },
+      { label: 'Avg Score', data: d.avg_score, borderColor: COLORS.magenta, backgroundColor: 'transparent', tension: 0.4, pointBackgroundColor: COLORS.magenta, pointRadius: 3, borderDash: [5,3], yAxisID: 'y2' }
+    ]},
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: true } },
+      scales: { y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } }, y2: { position: 'right', grid: { display: false }, min: 5, max: 10 } }
+    }
+  });
+}
+
+function buildGenre(d) {
+  const ctx = document.getElementById('chart-genre').getContext('2d');
+  charts.genre = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: d.genres, datasets: [{ label: 'Total Revenue ($M)', data: d.total_revenue, backgroundColor: COLORS.palette.map(c => c + 'cc'), borderColor: COLORS.palette, borderWidth: 1, borderRadius: 4, borderSkipped: false }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { font: { size: 10 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } } } }
+  });
+}
+
+function buildStudio(d) {
+  const ctx = document.getElementById('chart-studio').getContext('2d');
+  charts.studio = new Chart(ctx, {
+    type: 'bar',
+    data: { labels: d.studios.slice(0,10), datasets: [
+      { label: 'Total Revenue', data: d.total_revenue.slice(0,10), backgroundColor: 'rgba(0,245,255,0.7)', borderRadius: 4, borderSkipped: false },
+      { label: 'Total Profit', data: d.total_profit.slice(0,10), backgroundColor: 'rgba(255,0,170,0.6)', borderRadius: 4, borderSkipped: false }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: true } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { callback: v => `$${v}M` } }, y: { grid: { display: false }, ticks: { font: { size: 10 } } } } }
+  });
+}
+
+function buildDonut(d) {
+  const ctx = document.getElementById('chart-donut').getContext('2d');
+  charts.donut = new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels: d.tiers, datasets: [{ data: d.counts, backgroundColor: [COLORS.cyan, COLORS.magenta, COLORS.gold, COLORS.green], borderWidth: 2, borderColor: '#070b1a', hoverBorderWidth: 0 }] },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '65%', plugins: { legend: { position: 'bottom', labels: { padding: 12, font: { size: 11 } } } } }
+  });
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('table-body');
+  document.getElementById('row-count').textContent = `${data.length} results`;
+  if (!data.length) {
+    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;padding:2rem;color:var(--text-muted)">No results found</td></tr>';
+    return;
+  }
+  const tierColors = { 'Blockbuster': 'gold', 'Hit': 'cyan', 'Solid': 'green', 'Moderate': 'magenta' };
+  tbody.innerHTML = data.map((a, i) => {
+    const rankClass = i < 3 ? `rank-${i+1}` : '';
+    const tierC = tierColors[a.success_tier] || 'magenta';
+    const scoreWidth = ((a.mal_score - 5) / 5 * 100).toFixed(0);
+    return `<tr>
+      <td><span class="rank-num ${rankClass}">${a.rank}</span></td>
+      <td style="font-weight:600; min-width:180px">${a.title}</td>
+      <td>${a.year}</td>
+      <td><span class="badge badge-cyan" style="font-size:0.62rem">${a.primary_genre}</span></td>
+      <td style="font-size:0.82rem; color:var(--text-secondary)">${a.studio}</td>
+      <td style="font-family:var(--font-display); font-weight:700; color:var(--gold)">${fmt.money(a.box_office_m_usd)}</td>
+      <td style="font-size:0.82rem; color:var(--text-secondary)">${fmt.moneyFull(a.budget_m_usd)}</td>
+      <td style="font-family:var(--font-display); color:var(--green)">${fmt.ratio(a.profitability)}</td>
+      <td>
+        <div class="score-bar">
+          <span style="font-family:var(--font-display); font-size:0.82rem">${a.mal_score}</span>
+          <div class="score-track"><div class="score-fill" style="width:${scoreWidth}%"></div></div>
+        </div>
+      </td>
+      <td><span class="badge badge-${tierC}">${a.success_tier}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function applyFilters() {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const genre  = document.getElementById('filter-genre').value;
+  const studio = document.getElementById('filter-studio').value;
+  const sortBy = document.getElementById('sort-by').value;
+  let filtered = allData.filter(a => {
+    const matchSearch = !search || a.title.toLowerCase().includes(search) || a.studio.toLowerCase().includes(search);
+    const matchGenre  = !genre  || a.genre.includes(genre);
+    const matchStudio = !studio || a.studio === studio;
+    return matchSearch && matchGenre && matchStudio;
+  });
+  filtered.sort((a, b) => {
+    const av = a[sortBy], bv = b[sortBy];
+    return typeof av === 'string' ? av.localeCompare(bv) : bv - av;
+  });
+  renderTable(filtered);
+}
+
+function resetFilters() {
+  document.getElementById('filter-genre').value = '';
+  document.getElementById('filter-studio').value = '';
+  document.getElementById('sort-by').value = 'box_office_m_usd';
+  document.getElementById('search-input').value = '';
+  renderTable(allData);
+}
+
+function sortTable(key) {
+  sortAsc = sortKey === key ? !sortAsc : false;
+  sortKey = key;
+  const sorted = [...allData].sort((a, b) => {
+    const av = a[key], bv = b[key];
+    const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
+    return sortAsc ? cmp : -cmp;
+  });
+  document.querySelectorAll('.data-table th').forEach(th => th.classList.remove('sort-asc','sort-desc'));
+  renderTable(sorted);
+}
+
+initDashboard();
+</script>
+</body>
+</html>
