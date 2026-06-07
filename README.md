@@ -35,7 +35,7 @@
 ### Analytics Dashboard — Full Dataset Table
 ![Data Explorer](demo%20images/Screenshot%20(487).png)
 
-### Insights — Rating vs Box Office Correlation
+### Analytics Dashboard — KPI Cards & Top 15 Chart
 ![Correlation Scatter](demo%20images/Screenshot%20(488).png)
 
 > **Run locally:** `python app.py` → open `http://localhost:5000`
