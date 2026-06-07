@@ -20,9 +20,23 @@
 
 ## Live Preview
 
-| Home Page | Analytics Dashboard |
-|-----------|-------------------|
-| ![Home](your-name-sunset.jpg) | ![Dashboard](demon-slayer-infinity.jpg) |
+### Home — Hero Section
+![Home Hero](demo%20images/Screenshot%20(491).png)
+
+### Home — Four Powerful Modules
+![Feature Modules](demo%20images/Screenshot%20(492).png)
+
+### Analytics Dashboard — KPI Cards & Top 15 Chart
+![Dashboard KPIs](demo%20images/Screenshot%20(490).png)
+
+### Analytics Dashboard — Revenue Trends, Genre, Studio & Tier Charts
+![Dashboard Charts](demo%20images/Screenshot%20(489).png)
+
+### Analytics Dashboard — Full Dataset Table
+![Data Explorer](demo%20images/Screenshot%20(487).png)
+
+### Insights — Rating vs Box Office Correlation
+![Correlation Scatter](demo%20images/Screenshot%20(488).png)
 
 > **Run locally:** `python app.py` → open `http://localhost:5000`
 
