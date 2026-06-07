@@ -20,7 +20,7 @@
 
 ## Live Preview
 
-### Home — Hero Section
+### Insights — Rating vs Box Office Correlation
 ![Home Hero](demo%20images/Screenshot%20(491).png)
 
 ### Home — Four Powerful Modules
