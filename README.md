@@ -20,11 +20,12 @@
 
 ## Live Preview
 
+
+### Home page
+![Feature Modules](demo%20images/Screenshot%20(492).png)
+
 ### Insights — Rating vs Box Office Correlation
 ![Home Hero](demo%20images/Screenshot%20(491).png)
-
-### Home — Four Powerful Modules
-![Feature Modules](demo%20images/Screenshot%20(492).png)
 
 ### Analytics Dashboard — KPI Cards & Top 15 Chart
 ![Dashboard KPIs](demo%20images/Screenshot%20(490).png)
