@@ -32,7 +32,7 @@
 ### Analytics Dashboard — Revenue Trends, Genre, Studio & Tier Charts
 ![Dashboard Charts](demo%20images/Screenshot%20(489).png)
 
-### Analytics Dashboard — Full Dataset Table
+### Home — Four Powerful Modules
 ![Data Explorer](demo%20images/Screenshot%20(487).png)
 
 ### Analytics Dashboard — KPI Cards & Top 15 Chart
