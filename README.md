@@ -218,44 +218,133 @@ Full searchable, sortable, filterable data table of all 80 anime titles.
 
 ## 🏗️ Architecture
 
+
+```mermaid
+flowchart TB
+
+    subgraph Client Layer
+        U[👤 User]
+        B[🌐 Browser]
+    end
+
+    subgraph Frontend Layer
+        H[🏠 Home Page]
+        D[📊 Dashboard]
+        I[🔍 Insights]
+        P[🤖 Predictor]
+        JS[⚡ utils.js]
+        CH[📈 Chart.js]
+    end
+
+    subgraph Backend Layer
+        FL[🐍 Flask Application]
+        API[🔌 REST API Routes]
+        ANA[📊 Analytics Service]
+        ML[🤖 ML Predictor]
+    end
+
+    subgraph Data Layer
+        DF[(📁 Anime Dataset)]
+        PD[🐼 Pandas Engine]
+    end
+
+    subgraph Machine Learning
+        RF[🌲 Random Forest]
+        LR[📉 Linear Regression]
+        ENS[⚡ Ensemble Engine]
+    end
+
+    subgraph Deployment
+        GUN[🚀 Gunicorn]
+        CLOUD[☁️ Render / Railway]
+    end
+
+    U --> B
+
+    B --> H
+    B --> D
+    B --> I
+    B --> P
+
+    H --> JS
+    D --> JS
+    I --> JS
+    P --> JS
+
+    JS --> API
+
+    API --> FL
+
+    FL --> ANA
+    FL --> ML
+
+    ANA --> PD
+    PD --> DF
+
+    ML --> RF
+    ML --> LR
+
+    RF --> ENS
+    LR --> ENS
+
+    ENS --> API
+
+    API --> CH
+
+    FL --> GUN
+    GUN --> CLOUD
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        Browser (Client)                         │
-│                                                                 │
-│  index.html   dashboard.html   insights.html   predict.html    │
-│       └──────────────┴───────────────┴───────────────┘          │
-│                           utils.js                              │
-│              (API helper, chart defaults, nav render)           │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │  HTTP / JSON (REST API)
-┌──────────────────────────▼──────────────────────────────────────┐
-│                      Flask Application (app.py)                 │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │                   routes/api.py                           │   │
-│  │  /api/anime    /api/analysis    /api/predict              │   │
-│  └──────────┬───────────────┬────────────────┬──────────────┘   │
-│             │               │                │                  │
-│  ┌──────────▼──────┐  ┌─────▼─────────┐  ┌──▼─────────────┐   │
-│  │  analytics.py   │  │  analytics.py │  │  predictor.py  │   │
-│  │  EDA + Chart    │  │  KPI calcs    │  │  RF + LinReg   │   │
-│  └──────────┬──────┘  └──────┬────────┘  └──┬─────────────┘   │
-│             └────────────────┴───────────────┘                  │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │           data/dataset_builder.py                         │   │
-│  │   80 anime titles → Pandas DataFrame + Feature Eng.      │   │
-│  └──────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
 ```
 
-**Request Flow:**
+### 🔄 Request Flow
 ```
-User interaction
-    → utils.js API.get() / API.post()
-    → Flask route (routes/api.py)
-    → AnimeAnalyticsService / AnimeBoxOfficePredictor
-    → Pandas / scikit-learn
-    → jsonify() response
-    → Chart.js renders
+
+
+```mermaid
+sequenceDiagram
+
+    actor User
+    participant Browser
+    participant JS as utils.js
+    participant API as Flask API
+    participant Service as Analytics Service
+    participant ML as ML Predictor
+    participant Data as Pandas Dataset
+    participant Chart as Chart.js
+
+    User->>Browser: Open Dashboard
+
+    Browser->>JS: Load UI Components
+
+    JS->>API: GET /api/analysis
+
+    API->>Service: Request Analytics Data
+
+    Service->>Data: Query Dataset
+
+    Data-->>Service: Aggregated Results
+
+    Service-->>API: KPI + Chart Data
+
+    API-->>JS: JSON Response
+
+    JS->>Chart: Render Charts
+
+    Chart-->>User: Interactive Visualizations
+
+    User->>Browser: Submit Prediction
+
+    Browser->>JS: Prediction Form Data
+
+    JS->>API: POST /api/predict
+
+    API->>ML: Generate Prediction
+
+    ML-->>API: Revenue Forecast
+
+    API-->>JS: Prediction JSON
+
+    JS-->>User: Display Results
 ```
 
 ---
