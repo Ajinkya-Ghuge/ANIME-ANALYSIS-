@@ -294,15 +294,14 @@ flowchart TB
     FL --> GUN
     GUN --> CLOUD
 ```
-```
 
-### 🔄 Request Flow
-```
 
+
+
+## 🏗️ Request Flow
 
 ```mermaid
 sequenceDiagram
-
     actor User
     participant Browser
     participant JS as utils.js
@@ -313,42 +312,23 @@ sequenceDiagram
     participant Chart as Chart.js
 
     User->>Browser: Open Dashboard
-
     Browser->>JS: Load UI Components
-
     JS->>API: GET /api/analysis
-
     API->>Service: Request Analytics Data
-
     Service->>Data: Query Dataset
-
     Data-->>Service: Aggregated Results
-
     Service-->>API: KPI + Chart Data
-
     API-->>JS: JSON Response
-
     JS->>Chart: Render Charts
-
     Chart-->>User: Interactive Visualizations
 
     User->>Browser: Submit Prediction
-
     Browser->>JS: Prediction Form Data
-
     JS->>API: POST /api/predict
-
     API->>ML: Generate Prediction
-
     ML-->>API: Revenue Forecast
-
     API-->>JS: Prediction JSON
-
     JS-->>User: Display Results
-```
-
----
-
 ## 🛠️ Tech Stack
 
 ### Backend
