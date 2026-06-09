@@ -298,37 +298,55 @@ flowchart TB
 
 
 
-## 🏗️ Request Flow
+## 🔄 Request Flow
 
 ```mermaid
 sequenceDiagram
+
     actor User
+
     participant Browser
-    participant JS as utils.js
-    participant API as Flask API
-    participant Service as Analytics Service
-    participant ML as ML Predictor
-    participant Data as Pandas Dataset
-    participant Chart as Chart.js
+    participant UtilsJS
+    participant FlaskAPI
+    participant AnalyticsService
+    participant MLPredictor
+    participant Dataset
+    participant ChartJS
 
     User->>Browser: Open Dashboard
-    Browser->>JS: Load UI Components
-    JS->>API: GET /api/analysis
-    API->>Service: Request Analytics Data
-    Service->>Data: Query Dataset
-    Data-->>Service: Aggregated Results
-    Service-->>API: KPI + Chart Data
-    API-->>JS: JSON Response
-    JS->>Chart: Render Charts
-    Chart-->>User: Interactive Visualizations
+
+    Browser->>UtilsJS: Load UI Components
+
+    UtilsJS->>FlaskAPI: GET /api/analysis
+
+    FlaskAPI->>AnalyticsService: Request Analytics Data
+
+    AnalyticsService->>Dataset: Query Dataset
+
+    Dataset-->>AnalyticsService: Aggregated Results
+
+    AnalyticsService-->>FlaskAPI: KPI + Chart Data
+
+    FlaskAPI-->>UtilsJS: JSON Response
+
+    UtilsJS->>ChartJS: Render Charts
+
+    ChartJS-->>User: Interactive Visualizations
 
     User->>Browser: Submit Prediction
-    Browser->>JS: Prediction Form Data
-    JS->>API: POST /api/predict
-    API->>ML: Generate Prediction
-    ML-->>API: Revenue Forecast
-    API-->>JS: Prediction JSON
-    JS-->>User: Display Results
+
+    Browser->>UtilsJS: Prediction Form Data
+
+    UtilsJS->>FlaskAPI: POST /api/predict
+
+    FlaskAPI->>MLPredictor: Generate Prediction
+
+    MLPredictor-->>FlaskAPI: Revenue Forecast
+
+    FlaskAPI-->>UtilsJS: Prediction JSON
+
+    UtilsJS-->>User: Display Results
+```
 ## 🛠️ Tech Stack
 
 ### Backend
