@@ -1,0 +1,11 @@
+# Files to exclude from Render deployment
+demo images/
+.vscode/
+.sixth/
+*.md
+!README.md
+!DEPLOYMENT.md
+.git/
+.DS_Store
+*.pyc
+__pycache__/
